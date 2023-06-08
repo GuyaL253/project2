@@ -1,6 +1,7 @@
 package com.jb.project2.service;
 
 import com.jb.project2.beans.Company;
+import com.jb.project2.beans.Coupon;
 import com.jb.project2.beans.Customer;
 import com.jb.project2.exeptions.CouponSystemException;
 import com.jb.project2.exeptions.ErrMsg;
@@ -28,80 +29,68 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     @Override
     public void addCompany(Company company) throws CouponSystemException {
         if (company.getName().length() < 3) {
-            throw new CouponSystemException(ErrMsg.NAME_OF_COMPANY_ERROR);
+            throw new CouponSystemException(ErrMsg.COMPANY_MINIMUM_2_NOTES_LONG);
         }
         if (company.getPassword().length() < 10) {
-            throw new CouponSystemException(ErrMsg.PASSWORD_OF_COMPANY_ERROR);
+            throw new CouponSystemException(ErrMsg.COMPANY_PASSWORD_MINIMUM_10_NOTES_LONG);
         }
-//        if (company.getEmail().length() < 10) {
-//            throw new UserErrorException("'AdminImpl'", "'addCompany'", "The email of the company must be at least 10 notes long." +
-//                    " \nAdding failed.");
-//        }
-//        if (companiesRepo.findByName(company.getName()) != null) {
-//            throw new UserErrorException("'AdminImpl'", "'addCompany'", "There's already a company with that name in the DB." +
-//                    " \nAdding failed.");
-//        }
-//        if (companiesRepo.findByEmail(company.getEmail()) != null) {
-//            throw new UserErrorException("'AdminImpl'", "'addCompany'", "There's already a company with that email in the DB." +
-//                    " \nAdding failed.");
-//        }
-//        companyRepository.save(company);
+        if (company.getEmail().length() < 10) {
+            throw new CouponSystemException(ErrMsg.COMPANY_EMAIL_MINIMUM_10_NOTES_LONG);
+        }
+        if (companyRepository.findByName(company.getName()) != null) {
+            throw new CouponSystemException(ErrMsg.DB_DUPLICATE_COMPANY_NAME);
+        }
+        if (companyRepository.findByEmail(company.getEmail()) != null) {
+            throw new CouponSystemException(ErrMsg.DB_DUPLICATE_COMPANY_EMAIL);
+        }
+        companyRepository.save(company);
     }
 
     @Override
-    public void addCompaniesListToDB(List<Company> companies) {
-//        for (Company company : companies) {
-//            if (company.getName().length() < 3) {
-//                throw new UserErrorException("'AdminImpl'", "'addCompaniesListToDB'", "The name of the company must be at least 2 notes long." +
-//                        " \nAdding failed.");
-//            }
-//            if (company.getPassword().length() < 10) {
-//                throw new UserErrorException("'AdminImpl'", "'addCompaniesListToDB'", "The password of the company must be at least 10 notes long." +
-//                        " \nAdding failed.");
-//            }
-//            if (company.getEmail().length() < 10) {
-//                throw new UserErrorException("'AdminImpl'", "'addCompaniesListToDB'", "The email of the company must be at least 10 notes long." +
-//                        " \nAdding failed.");
-//            }
-//            if (companiesRepo.findByName(company.getName()) != null) {
-//                throw new UserErrorException("'AdminImpl'", "'addCompaniesListToDB'", "There's already a company with the name '"
-//                        + company.getName() + "' in the DB.");
-//            }
-//            if (companiesRepo.findByEmail(company.getEmail()) != null) {
-//                throw new UserErrorException("'AdminImpl'", "'addCompaniesListToDB'", "There's already a company with the email '"
-//                        + company.getName() + "' in the DB.");
-//            }
-//            companyRepository.save(company);
-//        }
+    public void addCompaniesListToDB(List<Company> companies) throws CouponSystemException {
+        for (Company company : companies) {
+            if (company.getName().length() < 3) {
+                throw new CouponSystemException(ErrMsg.COMPANY_NAME_MINIMUM_2_NOTES_LONG);
+            }
+            if (company.getPassword().length() < 10) {
+                throw new CouponSystemException(ErrMsg.COMPANY_PASSWORD_MINIMUM_10_NOTES_LONG);
+            }
+            if (company.getEmail().length() < 10) {
+                throw new CouponSystemException(ErrMsg.COMPANY_EMAIL_MINIMUM_10_NOTES_LONG);
+            }
+            if (companyRepository.findByName(company.getName()) != null) {
+                throw new CouponSystemException(ErrMsg.DB_DUPLICATE_COMPANY_NAME);
+            }
+            if (companyRepository.findByEmail(company.getEmail()) != null) {
+                throw new CouponSystemException(ErrMsg.DB_DUPLICATE_COMPANY_EMAIL);
+            }
+            companyRepository.save(company);
+        }
     }
 
     @Override
-    public void updateCompany(Company company) {
-//        //System.out.println(company);
-//        if ((companiesRepo.findByCompanyIdAndName(company.getCompanyId(), company.getName())) == null) {
-//            throw new UserErrorException("'AdminImpl'", "'updateCompany'", "You can't edit the company's id and name. Updating failed.");
-//        }
-//        if (company.getName().length() < 3) {
-//            throw new UserErrorException("'AdminImpl'", "'updateCompany'", "The name must be at least 2 notes long." +
-//                    " \nUpdating failed.");
-//        }
-//        if (company.getPassword().length() < 10) {
-//            throw new UserErrorException("'AdminImpl'", "'updateCompany'", "The password must be at least 10 notes long." +
-//                    " \nUpdating failed.");
-//        }
-//        if (company.getEmail().length() < 10) {
-//            throw new UserErrorException("'AdminImpl'", "'updateCompany'", "The email must be at least 10 notes long." +
-//                    " \nUpdating failed.");
-//        }
-//        companyRepository.save(company);
+    public void updateCompany(Company company) throws CouponSystemException {
+        //System.out.println(company);
+        if ((companyRepository.findByCompanyIdAndName(company.getCompanyId(), company.getName())) == null) {
+            throw new CouponSystemException(ErrMsg.UPDATE_FAILED_CANNOT_EDIT_ID_NAME);
+        }
+        if (company.getName().length() < 3) {
+            throw new CouponSystemException(ErrMsg.COMPANY_NAME_MINIMUM_2_NOTES_LONG);
+        }
+        if (company.getPassword().length() < 10) {
+            throw new CouponSystemException(ErrMsg.COMPANY_PASSWORD_MINIMUM_10_NOTES_LONG);
+        }
+        if (company.getEmail().length() < 10) {
+            throw new CouponSystemException(ErrMsg.COMPANY_EMAIL_MINIMUM_10_NOTES_LONG);
+        }
+        companyRepository.save(company);
     }
 
     @Override
-    public void deleteCompany(int companyID) {
-//        Company companyForDelete = companiesRepo.findById(companyID).orElseThrow(() -> new UserErrorException("'AdminImpl'", "'deleteCompany'",
-//                "The company you are trying to delete does not exist in the DB. Delete failed."));
-//        companyForDelete.getCoupons().forEach(coupon -> couponsRepo.deleteByCouponId(coupon.getCouponId()));
-//        companiesRepo.delete(companyForDelete);
+    public void deleteCompany(int companyID) throws CouponSystemException {
+        Company companyForDelete = companyRepository.findById(companyID).orElseThrow(() -> new CouponSystemException(ErrMsg.DELETE_FAILED_COMPANY_NOT_FOUND));
+        companyForDelete.getCoupons().forEach(coupon -> companyRepository.deleteById(coupon.getCouponId()));
+        companyRepository.delete(companyForDelete);
     }
 
     @Override
@@ -110,95 +99,84 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     }
 
     @Override
-    public Optional<Company> getOneCompany(int companyID) {
-//        if (!companyRepository.existsById(companyID)) {
-//            throw new UserErrorException("'AdminImpl'", "'getOneCompany'", "There is no company with this id.");
-//        }
+    public Optional<Company> getOneCompany(int companyID) throws CouponSystemException {
+        if (!companyRepository.existsById(companyID)) {
+            throw new CouponSystemException(ErrMsg.COMPANY_NOT_FOUND);
+        }
         return companyRepository.findById(companyID);
     }
 
     @Override
-    public void addCustomer(Customer customer) {
-//        if (customer.getFirstName().length() < 3) {
-//            throw new UserErrorException("'AdminImpl'", "'addCustomer'", "The first name must be at least 2 notes long." +
-//                    " \nAdding failed.");
-//        }
-//        if (customer.getLastName().length() < 3) {
-//            throw new UserErrorException("'AdminImpl'", "'addCustomer'", "The last name must be at least 2 notes long." +
-//                    " \nAdding failed.");
-//        }
-//        if (customer.getEmail().length() < 10) {
-//            throw new UserErrorException("'AdminImpl'", "'addCustomer'", "The email must be at least 10 notes long." +
-//                    " \nAdding failed.");
-//        }
-//        if (customer.getPassword().length() < 10) {
-//            throw new UserErrorException("'AdminImpl'", "'addCustomer'", "The password must be at least 10 notes long." +
-//                    " \nAdding failed.");
-//        }
-//        if (customersRepo.findByEmail(customer.getEmail()) != null) {
-//            throw new UserErrorException("'AdminImpl'", "'addCustomer'", "There's already a customer with that email in the DB. Adding failed.");
-//        }
-//        customersRepo.save(customer);
-    }
-
-    @Override
-    public void addCustomersListToDB(List<Customer> customers) {
-//        for (Customer customer : customers) {
-//            if (customer.getFirstName().length() < 3) {
-//                throw new UserErrorException("'AdminImpl'", "'addCustomersListToDB'", "The first name must be at least 2 notes long." +
-//                        " \nAdding failed.");
-//            }
-//            if (customer.getLastName().length() < 3) {
-//                throw new UserErrorException("'AdminImpl'", "'addCustomersListToDB'", "The last name must be at least 2 notes long." +
-//                        " \nAdding failed.");
-//            }
-//            if (customer.getEmail().length() < 10) {
-//                throw new UserErrorException("'AdminImpl'", "'addCustomersListToDB'", "The email must be at least 10 notes long." +
-//                        " \nAdding failed.");
-//            }
-//            if (customer.getPassword().length() < 10) {
-//                throw new UserErrorException("'AdminImpl'", "'addCustomersListToDB'", "The password must be at least 10 notes long." +
-//                        " \nAdding failed.");
-//            }
-//            if (customersRepo.findByEmail(customer.getEmail()) != null) {
-//                throw new UserErrorException("'AdminImpl'", "'addCustomersListToDB'", "There's already a customer with the email." + customer.getEmail() + " in the DB. Adding was not done.");
-//            }
-//            customersRepo.save(customer);
+    public void addCustomer(Customer customer) throws CouponSystemException {
+        if (customer.getFirstName().length() < 3) {
+            throw new CouponSystemException(ErrMsg.FIRST_NAME_MINIMUM_2_NOTES_LONG);
         }
-
-
-    @Override
-    public void updateCustomer(Customer customer) {
-//        if (!customersRepo.existsById(customer.getCustomerId())) {
-//            throw new UserErrorException("'AdminImpl'", "'updateCustomer'", "There is no customer with this id in the DB. Updating failed.");
-//        }
-//        if (customer.getFirstName().length() < 3) {
-//            throw new UserErrorException("'AdminImpl'", "'updateCustomer'", "The first name must be at least 2 notes long." +
-//                    " \nAdding failed.");
-//        }
-//        if (customer.getLastName().length() < 3) {
-//            throw new UserErrorException("'AdminImpl'", "'updateCustomer'", "The last name must be at least 2 notes long." +
-//                    " \nAdding failed.");
-//        }
-//        if (customer.getEmail().length() < 10) {
-//            throw new UserErrorException("'AdminImpl'", "'updateCustomer'", "The email must be at least 10 notes long." +
-//                    " \nAdding failed.");
-//        }
-//        if (customer.getPassword().length() < 10) {
-//            throw new UserErrorException("'AdminImpl'", "'updateCustomer'", "The password must be at least 10 notes long." +
-//                    " \nAdding failed.");
-//        }
-//        customersRepo.save(customer);
+        if (customer.getLastName().length() < 3) {
+            throw new CouponSystemException(ErrMsg.LAST_NAME_MINIMUM_2_NOTES_LONG);
+        }
+        if (customer.getEmail().length() < 10) {
+            throw new CouponSystemException(ErrMsg.EMAIL_MINIMUM_10_NOTES_LONG);
+        }
+        if (customer.getPassword().length() < 10) {
+            throw new CouponSystemException(ErrMsg.PASSWORD_MINIMUM_10_NOTES_LONG);
+        }
+        if (customerRepository.findByEmail(customer.getEmail()) != null) {
+            throw new CouponSystemException(ErrMsg.DB_DUPLICATE_CUSTOMER_EMAIL);
+        }
+        customerRepository.save(customer);
     }
 
     @Override
-    public void deleteCustomer(int customerID) {
-//        Customer customerForDelete = customersRepo.findById(customerId).orElseThrow(() -> new UserErrorException("'AdminImpl'", "'deleteCustomer'", "There is no company with that id."));
-//        List<Coupon> coupons = customerForDelete.getCoupons();
-//        coupons.clear();
-//        customerForDelete.setCoupons(coupons);
-//        customersRepo.saveAndFlush(customerForDelete);
-//        customersRepo.delete(customerForDelete);
+    public void addCustomersListToDB(List<Customer> customers) throws CouponSystemException {
+        for (Customer customer : customers) {
+            if (customer.getFirstName().length() < 3) {
+                throw new CouponSystemException(ErrMsg.FIRST_NAME_MINIMUM_2_NOTES_LONG);
+            }
+            if (customer.getLastName().length() < 3) {
+                throw new CouponSystemException(ErrMsg.LAST_NAME_MINIMUM_2_NOTES_LONG);
+            }
+            if (customer.getEmail().length() < 10) {
+                throw new CouponSystemException(ErrMsg.EMAIL_MINIMUM_10_NOTES_LONG);
+            }
+            if (customer.getPassword().length() < 10) {
+                throw new CouponSystemException(ErrMsg.PASSWORD_MINIMUM_10_NOTES_LONG);
+            }
+            if (customerRepository.findByEmail(customer.getEmail()) != null) {
+                throw new CouponSystemException(ErrMsg.DB_DUPLICATE_CUSTOMER_EMAIL);
+            }
+            customerRepository.save(customer);
+        }
+    }
+
+
+    @Override
+    public void updateCustomer(Customer customer) throws CouponSystemException {
+        if (!customerRepository.existsById(customer.getCustomerId())) {
+            throw new CouponSystemException(ErrMsg.DB_UPDATE_FAILED_CUSTOMER_NOT_FOUND);
+        }
+        if (customer.getFirstName().length() < 3) {
+            throw new CouponSystemException(ErrMsg.FIRST_NAME_MINIMUM_2_NOTES_LONG);
+        }
+        if (customer.getLastName().length() < 3) {
+            throw new CouponSystemException(ErrMsg.LAST_NAME_MINIMUM_2_NOTES_LONG);
+        }
+        if (customer.getEmail().length() < 10) {
+            throw new CouponSystemException(ErrMsg.EMAIL_MINIMUM_10_NOTES_LONG);
+        }
+        if (customer.getPassword().length() < 10) {
+            throw new CouponSystemException(ErrMsg.PASSWORD_MINIMUM_10_NOTES_LONG);
+        }
+        customerRepository.save(customer);
+    }
+
+    @Override
+    public void deleteCustomer(int customerId) throws CouponSystemException {
+        Customer customerForDelete = customerRepository.findById(customerId).orElseThrow(() -> new CouponSystemException(ErrMsg.COMPANY_NOT_FOUND));
+        List<Coupon> coupons = customerForDelete.getCoupons();
+        coupons.clear();
+        customerForDelete.setCoupons(coupons);
+        customerRepository.saveAndFlush(customerForDelete);
+        customerRepository.delete(customerForDelete);
     }
 
     @Override
@@ -207,13 +185,11 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     }
 
     @Override
-    public Optional<Customer> getOneCustomer(int customerID) {
-//        if (!customerRepository.existsById(customerID)) {
-//            throw new UserErrorException("'AdminImpl'", "'getOneCustomer'", "There is no customer with this id.");
-//        }
+    public Optional<Customer> getOneCustomer(int customerID) throws CouponSystemException {
+        if (!customerRepository.existsById(customerID)) {
+            throw new CouponSystemException(ErrMsg.CUSTOMER_NOT_FOUND);
+        }
         return customerRepository.findById(customerID);
-//    }
     }
-
-
 }
+

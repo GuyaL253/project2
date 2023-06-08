@@ -13,21 +13,22 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class Customer {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    private int id;
+    private int customerId;
 
-    @Column(length = 20,nullable = false)
+    @Column(length = 30, nullable = false)
     private String firstName;
 
-    @Column(length = 20,nullable = false)
+    @Column(length = 30, nullable = false)
     private String lastName;
 
-    @Column(length = 20,nullable = false)
+    @Column(length = 30, nullable = false)
     private String email;
 
-    @Column(length = 20,nullable = false)
+    @Column(length = 30, nullable = false)
     private String password;
 
     @Singular

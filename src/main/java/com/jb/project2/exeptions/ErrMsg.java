@@ -5,9 +5,33 @@ import lombok.Getter;
 @Getter
 public enum ErrMsg {
 
-    NAME_OF_COMPANY_ERROR("The name of the company must be at least 2 notes long."),
+    COMPANY_MINIMUM_2_NOTES_LONG("The name of the company must be at least 2 notes long."),
+    COMPANY_PASSWORD_MINIMUM_10_NOTES_LONG("The password of the company must be at least 10 notes long."),
+    COMPANY_EMAIL_MINIMUM_10_NOTES_LONG("The email of the company must be at least 10 notes long."),
+    DB_DUPLICATE_COMPANY_NAME("There's already a company with that name in the DB."),
+    DB_DUPLICATE_COMPANY_EMAIL("There's already a company with that email in the DB."),
+    COMPANY_NAME_MINIMUM_2_NOTES_LONG("The name of the company must be at least 2 notes long."),
+    UPDATE_FAILED_CANNOT_EDIT_ID_NAME("You can't edit the company's ID and name. Updating failed."),
+    DELETE_FAILED_COMPANY_NOT_FOUND("The company you are trying to delete does not exist in the DB. Delete failed."),
+    COMPANY_NOT_FOUND("There is no company with this ID."),
+    CUSTOMER_NOT_FOUND("There is no customer with this ID."),
+    FIRST_NAME_MINIMUM_2_NOTES_LONG("The first name must be at least 2 notes long."),
+    LAST_NAME_MINIMUM_2_NOTES_LONG("The last name must be at least 2 notes long."),
+    EMAIL_MINIMUM_10_NOTES_LONG("The email must be at least 10 notes long."),
+    PASSWORD_MINIMUM_10_NOTES_LONG("The password must be at least 10 notes long."),
+    DB_DUPLICATE_CUSTOMER_EMAIL("There's already a customer with that email in the DB. Adding failed."),
+    DB_UPDATE_FAILED_CUSTOMER_NOT_FOUND("There is no customer with this ID in the DB. Updating failed."),
 
-    PASSWORD_OF_COMPANY_ERROR("The password of the company must be at least 10 notes long."),
+
+
+
+
+
+
+
+
+
+
 
     ADMIN_LOGIN_ERROR("\u001B[31mLogin failed, Wrong Email or password.\u001B[0m"),
 

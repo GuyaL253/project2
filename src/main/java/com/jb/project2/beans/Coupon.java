@@ -19,11 +19,10 @@ public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    private int id;
+    private int couponId;
 
-    @ManyToOne
-    @JoinColumn(name = "companyId")
-    private Company company;
+    @Column(updatable = false)
+    private int companyId;
 
     @Enumerated(value = EnumType.STRING)
     private Category category;
