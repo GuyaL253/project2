@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 @Data
 public class CompanyServiceImpl extends ClientService implements CompanyService {
 
+    private static Date currentDate = Date.valueOf(LocalDate.now());
     private static Company companyLoggedIn;
 
     @Override
@@ -46,12 +48,13 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
         if (coupon.getImage().equals("")) {
             throw new CouponSystemException(ErrMsg.ADDING_FAILED_MISSING_IMAGE_LINK);
         }
-        if (coupon.getEndDate().before(new Date(2023,06,07))) {
-            throw new CouponSystemException(ErrMsg.ADDING_FAILED_INVALID_END_DATE);
-        }
+//        if (coupon.getEndDate().before(new Date(2023,06,07))) {
+//            throw new CouponSystemException(ErrMsg.ADDING_FAILED_INVALID_END_DATE);
+//        }
         if (coupon.getPrice() < 0) {
             throw new CouponSystemException(ErrMsg.ADDING_FAILED_INVALID_PRICE);
         }
+
         couponRepository.save(coupon);
         List<Coupon> coupons = companyLoggedIn.getCoupons();
         coupons.add(coupon);
@@ -77,9 +80,9 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
                 throw new CustomException("Problem with coupon '" + coupon.getTitle() + "': image can't be empty." +
                         " \nAdding failed.");
             }
-            if (coupon.getEndDate().before(new Date(2023,06,07))) {
+            if (coupon.getEndDate().before(currentDate)) {
                 throw new CustomException("Problem with coupon '" + coupon.getTitle() + "': The end-date must be in a future date." +
-                        " \nAdding failed.");
+                        "\nAdding failed.");
             }
             if (coupon.getPrice() < 0) {
                 throw new CustomException("Problem with coupon '" + coupon.getTitle() + "': The price can't be below zero." +
@@ -95,8 +98,9 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
             if (company.getCoupons().contains(coupon)) {
                 throw new CustomException("The coupon '" + coupon.getTitle() + "' already exists at this company.");
             }
-            if (coupon.getEndDate().before(new Date(2023,06,07))) {
-                throw new CustomException("The end date of coupon '" + coupon.getTitle() + "' had already passed.");
+            if (coupon.getEndDate().before(currentDate)) {
+                throw new CustomException("Problem with coupon '" + coupon.getTitle() + "': The end-date must be in a future date." +
+                        "\nAdding failed.");
             }
         }
         company.setCoupons(coupons);
@@ -104,7 +108,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
     }
 
     @Override
-    public void updateCoupon(Coupon coupon) throws CouponSystemException {
+    public void updateCoupon(Coupon coupon) throws CouponSystemException, CustomException {
         if (couponRepository.findByCompanyIdAndCouponId(coupon.getCompanyId(), coupon.getCouponId()) == null) {
             throw new CouponSystemException(ErrMsg.UPDATE_FAILED_CANNOT_CHANGE_IDS);
         }
@@ -117,8 +121,9 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
         if (coupon.getImage().equals("")) {
             throw new CouponSystemException(ErrMsg.UPDATE_FAILED_MISSING_IMAGE_LINK);
         }
-        if (coupon.getEndDate().before(new Date(2023,06,07))) {
-            throw new CouponSystemException(ErrMsg.UPDATE_FAILED_INVALID_END_DATE);
+        if (coupon.getEndDate().before(currentDate)) {
+            throw new CustomException("Problem with coupon '" + coupon.getTitle() + "': The end-date must be in a future date." +
+                    "\nAdding failed.");
         }
         if (coupon.getPrice() < 0) {
             throw new CouponSystemException(ErrMsg.UPDATE_FAILED_INVALID_PRICE);

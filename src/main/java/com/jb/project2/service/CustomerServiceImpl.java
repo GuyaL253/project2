@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +19,9 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Data
 public class CustomerServiceImpl extends ClientService implements CustomerService {
+
+    private static Date currentDate = Date.valueOf(LocalDate.now());
+
     private static Customer customerLoggedIn;
 
     @Override
@@ -38,8 +42,9 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
         if (coupon.getAmount() == 0) {
             throw new CouponSystemException(ErrMsg.OUT_OF_STOCK);
         }
-        if (coupon.getEndDate().before(new Date(2023,06,07))) {
-            throw new CouponSystemException(ErrMsg.COUPON_EXPIRED);
+        if (coupon.getEndDate().before(currentDate)) {
+            throw new CustomException("Problem with coupon '" + coupon.getTitle() + "': The end-date must be in a future date." +
+                    "\nAdding failed.");
         }
         coupon.setAmount(coupon.getAmount() - 1);
         couponRepository.save(coupon);
@@ -82,12 +87,15 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
             throw new CustomException("Sorry, coupon number " + couponID +
                     " ran-out in our stock. No purchase was done.");
         }
-        if (coupon.getEndDate().before(new Date(2023,06,07))) {
-            throw new CouponSystemException(ErrMsg.COUPON_EXPIRED);
+        if (coupon.getEndDate().before(currentDate)) {
+            throw new CustomException("Problem with coupon '" + coupon.getTitle() + "': The end-date must be in a future date." +
+                    "\nAdding failed.");
         }
+
         coupon.setAmount(coupon.getAmount() - 1);
         couponRepository.save(coupon);
         customer.getCoupons().add(coupon);
         customerRepository.save(customer);
     }
 }
+

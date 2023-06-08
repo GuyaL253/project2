@@ -16,7 +16,6 @@ public enum ErrMsg {
     COMPANY_NOT_FOUND("There is no company with this ID."),
     CUSTOMER_NOT_FOUND("There is no customer with this ID."),
     COUPON_NOT_FOUND("There is no coupon with that ID."),
-
     FIRST_NAME_MINIMUM_2_NOTES_LONG("The first name must be at least 2 notes long."),
     LAST_NAME_MINIMUM_2_NOTES_LONG("The last name must be at least 2 notes long."),
     EMAIL_MINIMUM_10_NOTES_LONG("The email must be at least 10 notes long."),

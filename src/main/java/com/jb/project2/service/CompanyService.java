@@ -18,7 +18,7 @@ public interface CompanyService {
 
     void addCouponsListToCompany(int companyId, List<Coupon> coupons) throws CouponSystemException, CustomException;
 
-    void updateCoupon(Coupon coupon) throws CouponSystemException;
+    void updateCoupon(Coupon coupon) throws CouponSystemException, CustomException;
 
     void deleteCoupon(int couponID) throws CouponSystemException;
 
