@@ -34,4 +34,5 @@ public interface CompanyService {
 
     Company getCompanyDetails() throws CouponSystemException;
 
+
 }

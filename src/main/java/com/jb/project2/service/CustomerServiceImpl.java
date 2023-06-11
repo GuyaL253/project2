@@ -1,6 +1,7 @@
 package com.jb.project2.service;
 
 import com.jb.project2.beans.Category;
+import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Coupon;
 import com.jb.project2.beans.Customer;
 import com.jb.project2.exeptions.CouponSystemException;
@@ -96,6 +97,9 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
         couponRepository.save(coupon);
         customer.getCoupons().add(coupon);
         customerRepository.save(customer);
+    }
+    public Customer getCustomerLoggedIn() {
+        return customerLoggedIn;
     }
 }
 

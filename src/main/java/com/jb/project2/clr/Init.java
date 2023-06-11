@@ -31,109 +31,38 @@ public class Init implements CommandLineRunner {
             Art.sperator();
             AdminServiceImpl adminImpl = (AdminServiceImpl) loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR);
 
-            Company company1 = Company.builder()
-                    .name("Nike")
-                    .email("nike@gmail.com")
-                    .password("password123456")
-                    .build();
+            Company company1 = Company.builder().name("Nike").email("nike@gmail.com").password("password123456").build();
 
-            Company company2 = Company.builder()
-                    .name("Adidas")
-                    .email("adidas@gmail.com")
-                    .password("company1234567")
-                    .build();
+            Company company2 = Company.builder().name("Adidas").email("adidas@gmail.com").password("company1234567").build();
 
-            Company company3 = Company.builder()
-                    .name("Puma")
-                    .email("puma@gmail.com")
-                    .password("puma2022!password")
-                    .build();
+            Company company3 = Company.builder().name("Puma").email("puma@gmail.com").password("puma2022!password").build();
 
-            Company company4 = Company.builder()
-                    .name("Under Armour")
-                    .email("underarmour@gmail.com")
-                    .password("UA_password123456")
-                    .build();
+            Company company4 = Company.builder().name("Under Armour").email("underarmour@gmail.com").password("UA_password123456").build();
 
-            Company company5 = Company.builder()
-                    .name("Reebok")
-                    .email("reebok@gmail.com")
-                    .password("Rbk@2023password")
-                    .build();
+            Company company5 = Company.builder().name("Reebok").email("reebok@gmail.com").password("Rbk@2023password").build();
 
             List<Company> companies = Arrays.asList(company1, company2, company3, company4, company5);
             adminImpl.addCompaniesListToDB(companies);
 
-            Customer customer1 = Customer.builder()
-                    .firstName("Cristiano")
-                    .lastName("Ronaldo")
-                    .email("Cristiano@gmail.com")
-                    .password("password123456")
-                    .build();
+            Customer customer1 = Customer.builder().firstName("Cristiano").lastName("Ronaldo").email("Cristiano@gmail.com").password("password123456").build();
 
-            Customer customer2 = Customer.builder()
-                    .firstName("Lionel")
-                    .lastName("Messi")
-                    .email("Lionel@gmail.com")
-                    .password("customer1234567")
-                    .build();
+            Customer customer2 = Customer.builder().firstName("Lionel").lastName("Messi").email("Lionel@gmail.com").password("customer1234567").build();
 
-            Customer customer3 = Customer.builder()
-                    .firstName("Neymar")
-                    .lastName("Jrr")
-                    .email("Neymar@gmail.com")
-                    .password("Neymar2022!password")
-                    .build();
+            Customer customer3 = Customer.builder().firstName("Neymar").lastName("Jrr").email("Neymar@gmail.com").password("Neymar2022!password").build();
 
-            Customer customer4 = Customer.builder()
-                    .firstName("Kylian")
-                    .lastName("Mbappe")
-                    .email("Kylian@gmail.com")
-                    .password("Mbappe_password123456")
-                    .build();
+            Customer customer4 = Customer.builder().firstName("Kylian").lastName("Mbappe").email("Kylian@gmail.com").password("Mbappe_password123456").build();
 
-            Customer customer5 = Customer.builder()
-                    .firstName("Kobi")
-                    .lastName("Shasha")
-                    .email("kobi.shasha@gmail.com")
-                    .password("Shasha@2023password")
-                    .build();
+            Customer customer5 = Customer.builder().firstName("Kobi").lastName("Shasha").email("kobi.shasha@gmail.com").password("Shasha@2023password").build();
 
-            Customer customer6 = Customer.builder()
-                    .firstName("Kevin")
-                    .lastName("DeBruyne")
-                    .email("Kevin@gmail.com")
-                    .password("DeBruyne2023@password")
-                    .build();
+            Customer customer6 = Customer.builder().firstName("Kevin").lastName("DeBruyne").email("Kevin@gmail.com").password("DeBruyne2023@password").build();
 
-            Customer customer7 = Customer.builder()
-                    .firstName("Sadio")
-                    .lastName("Mane")
-                    .email("Sadio@gmail.com")
-                    .password("Mane1234567890!")
-                    .build();
+            Customer customer7 = Customer.builder().firstName("Sadio").lastName("Mane").email("Sadio@gmail.com").password("Mane1234567890!").build();
 
-            Customer customer8 = Customer.builder()
-                    .firstName("Virgil")
-                    .lastName("Van Dijk")
-                    .email("Virgil@gmail.com")
-                    .password("VanDijk@2023password")
-                    .build();
+            Customer customer8 = Customer.builder().firstName("Virgil").lastName("Van Dijk").email("Virgil@gmail.com").password("VanDijk@2023password").build();
 
-            Customer customer9 = Customer.builder()
-                    .firstName("Robert")
-                    .lastName("Lewandowski")
-                    .email("Robert@gmail.com")
-                    .password("Lewandowski@2023")
-                    .build();
+            Customer customer9 = Customer.builder().firstName("Robert").lastName("Lewandowski").email("Robert@gmail.com").password("Lewandowski@2023").build();
 
-            Customer customer10 = Customer.builder()
-                    .firstName("Jan")
-                    .lastName("Oblak")
-                    .email("Jan@gmail.com")
-                    .password("Oblak2023!password")
-                    .build();
-
+            Customer customer10 = Customer.builder().firstName("Jan").lastName("Oblak").email("Jan@gmail.com").password("Oblak2023!password").build();
 
 
             List<Customer> customers = Arrays.asList(customer1, customer2, customer3, customer4, customer5, customer6, customer7, customer8, customer9, customer10);
@@ -142,6 +71,7 @@ public class Init implements CommandLineRunner {
             CompanyServiceImpl companiesImpl = (CompanyServiceImpl) loginManager.login("nike@gmail.com", "password123456", ClientType.COMPANY);
 
             ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             Coupon coupon1 = Coupon.builder().companyId(1).category(Category.BALLS).title("Nike").description("Nike coupon: Get 10% off on all sports balls").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(1000.00).image("https://example.com/nike_coupon_image.jpg").build();
 
             Coupon coupon2 = Coupon.builder().companyId(1).category(Category.SHOES).title("Adidas").description("Adidas coupon: Buy one pair of shoes and get 50% off on the second pair").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(79.90).image("https://example.com/adidas_coupon_image.jpg").build();
@@ -168,7 +98,7 @@ public class Init implements CommandLineRunner {
 
             Coupon coupon13 = Coupon.builder().companyId(4).category(Category.JERSEYS).title("Puma").description("Puma coupon: Buy two sports jerseys and get a sports water bottle for free").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(99.90).image("https://example.com/puma_coupon_image.jpg").build();
 
-            Coupon coupon14 = Coupon.builder().companyId(4).category(Category.BALLS).title("Under Armor").description("Under Armor coupon: Buy any two sports balls and get the third one at half price").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(500.00).image("https://example.com/under armor_coupon_image.jpg").build();
+            Coupon coupon14 = Coupon.builder().companyId(4).category(Category.BALLS).title("Under Armor").description("Under Armor coupon: Buy any two sports balls and get the third one at half price").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(0).price(500.00).image("https://example.com/under armor_coupon_image.jpg").build();
 
             Coupon coupon15 = Coupon.builder().companyId(4).category(Category.SHOES).title("Reebok").description("Reebok coupon: Get 20% off on all running shoes").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(5.00).image("https://example.com/reebok_coupon_image.jpg").build();
 

@@ -21,10 +21,10 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
     List<Coupon> findByEndDateBefore(LocalDate now);
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM customer_coupons WHERE coupons_coupon_id=:couponId", nativeQuery = true)
+    @Query(value = "DELETE FROM customers_coupons WHERE coupons_coupon_id=:couponId", nativeQuery = true)
     void deleteByCouponId(int couponId);
     @Transactional
     @Modifying
-    @Query(value = "DELETE FROM company_coupons WHERE coupons_coupon_id=:couponId", nativeQuery = true)
+    @Query(value = "DELETE FROM companies_coupons WHERE coupons_coupon_id=:couponId", nativeQuery = true)
     void deleteByCouponsId(int couponId);
 }
