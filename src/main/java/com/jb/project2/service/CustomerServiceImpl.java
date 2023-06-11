@@ -98,8 +98,10 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
         customer.getCoupons().add(coupon);
         customerRepository.save(customer);
     }
+
     public Customer getCustomerLoggedIn() {
         return customerLoggedIn;
     }
+
 }
 

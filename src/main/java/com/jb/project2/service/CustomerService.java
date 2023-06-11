@@ -20,4 +20,6 @@ public interface CustomerService {
     List<Coupon> getCustomerCouponsByMaxPrice(double maxPrice) throws CouponSystemException;
 
     void showCustomerDetails() throws CouponSystemException;
+
+
 }
