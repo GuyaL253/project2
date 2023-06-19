@@ -20,8 +20,14 @@ import java.util.List;
 @RequiredArgsConstructor
 @Order(1)
 public class Init implements CommandLineRunner {
-
+    //            LoginInfo loginAdminDto = LoginInfo.builder()
+//                    .email("admin@admin.com")
+//                    .password("admin")
+//                    .clientType(ClientType.ADMINISTRATOR)
+//                    .build();
+//             loginManager.login(loginAdminDto);
     private final LoginManager loginManager;
+
     @Override
     public void run(String... args) throws Exception {
 

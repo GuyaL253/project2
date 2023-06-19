@@ -4,16 +4,20 @@ import com.jb.project2.beans.Category;
 import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Coupon;
 import com.jb.project2.beans.Customer;
+import com.jb.project2.dto.LoginResDto;
 import com.jb.project2.exeptions.CouponSystemException;
 import com.jb.project2.exeptions.CustomException;
 import com.jb.project2.exeptions.ErrMsg;
+import com.jb.project2.security.LoginInfo;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,13 +30,30 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
     private static Customer customerLoggedIn;
 
     @Override
-    public boolean login(String email, String password) throws CouponSystemException {
-        customerLoggedIn = customerRepository.findByEmailAndPassword(email, password);
-        if (customerLoggedIn == null) {
-            throw new CouponSystemException(ErrMsg.LOGIN_FAILED_INVALID_DETAILS);
+    public LoginResDto login(String email, String password) throws CouponSystemException {
+        if (customerRepository.existsByEmailAndPassword(email, password)) {
+            Customer loggedInCustomer = customerRepository.findFirstByEmailAndPassword(email, password);
+            int customerId = loggedInCustomer.getCustomerId();
+            tokenService.addClient(customerId, ClientType.CUSTOMER);
+            LoginInfo loginInfo = LoginInfo.builder()
+                    .id(customerId)
+                    .clientType(ClientType.CUSTOMER)
+                    .time(LocalDateTime.now())
+                    .build();
+            UUID token = tokenService.getToken(loginInfo);
+
+            // Set the customerLoggedIn variable with the logged-in customer
+            customerLoggedIn = loggedInCustomer;
+
+            return LoginResDto.builder()
+                    .id(customerId)
+                    .token(token)
+                    .clientType(ClientType.CUSTOMER)
+                    .build();
         }
-        return true;
+        throw new CouponSystemException(ErrMsg.LOGIN_FAILED);
     }
+
 
     @Override
     public void purchaseCoupon(int couponID) throws CouponSystemException, CustomException {

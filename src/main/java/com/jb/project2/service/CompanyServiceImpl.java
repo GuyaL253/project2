@@ -3,18 +3,22 @@ package com.jb.project2.service;
 import com.jb.project2.beans.Category;
 import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Coupon;
+import com.jb.project2.dto.LoginResDto;
 import com.jb.project2.exeptions.CouponSystemException;
 import com.jb.project2.exeptions.CustomException;
 import com.jb.project2.exeptions.ErrMsg;
+import com.jb.project2.security.LoginInfo;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,13 +30,30 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
     private static Company companyLoggedIn;
 
     @Override
-    public boolean login(String email, String password) throws CouponSystemException {
-        companyLoggedIn = companyRepository.findByEmailAndPassword(email, password);
-        if (companyLoggedIn == null) {
-            throw new CouponSystemException(ErrMsg.LOGIN_FAILED_INVALID_DETAILS);
+    public LoginResDto login(String email, String password) throws CouponSystemException {
+        if (companyRepository.existsByEmailAndPassword(email, password)) {
+            Company loggedInCompany = companyRepository.findFirstByEmailAndPassword(email, password);
+            int companyId = loggedInCompany.getCompanyId();
+            tokenService.addClient(companyId, ClientType.COMPANY);
+            LoginInfo loginInfo = LoginInfo.builder()
+                    .id(companyId)
+                    .clientType(ClientType.COMPANY)
+                    .time(LocalDateTime.now())
+                    .build();
+            UUID token = tokenService.getToken(loginInfo);
+
+            // Set the companyLoggedIn variable with the logged-in company
+            companyLoggedIn = loggedInCompany;
+
+            return LoginResDto.builder()
+                    .id(companyId)
+                    .token(token)
+                    .clientType(ClientType.COMPANY)
+                    .build();
         }
-        return true;
+        throw new CouponSystemException(ErrMsg.LOGIN_FAILED);
     }
+
 
     @Override
     public void addCoupon(Coupon coupon) throws CouponSystemException {

@@ -10,6 +10,10 @@ import java.time.format.DateTimeFormatter;
 public class Art {
     private static int count = 1;
 
+    public static void  controlDescription(String txt){
+        System.out.println(txt);
+    }
+
     public static void print(String text) {
         // ANSI escape code for yellow color
         final String ANSI_YELLOW = "\u001B[33m";

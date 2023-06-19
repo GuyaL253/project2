@@ -3,27 +3,42 @@ package com.jb.project2.service;
 import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Coupon;
 import com.jb.project2.beans.Customer;
+import com.jb.project2.dto.LoginResDto;
 import com.jb.project2.exeptions.CouponSystemException;
 import com.jb.project2.exeptions.ErrMsg;
+import com.jb.project2.security.LoginInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class AdminServiceImpl extends ClientService implements AdminService {
 
     @Override
-    public boolean login(String email, String password) throws CouponSystemException {
-        String adminEmail = "admin@admin.com";
-        String adminPassword = "admin";
-        if (adminEmail.equals(email) && adminPassword.equals(password)) {
-            return true;
+    public LoginResDto login(String email, String password) throws CouponSystemException {
+        boolean res = Objects.equals(email, "admin@admin.com") && Objects.equals(password, "admin");
+        if (res) {
+            int adminId = 0;
+            tokenService.addClient(adminId, ClientType.ADMINISTRATOR);
+            LoginInfo loginInfo = LoginInfo.builder()
+                    .id(adminId)
+                    .clientType(ClientType.ADMINISTRATOR)
+                    .time(LocalDateTime.now())
+                    .build();
+            UUID token = tokenService.getToken(loginInfo);
+            return LoginResDto.builder()
+                    .id(adminId)
+                    .token(token)
+                    .clientType(ClientType.ADMINISTRATOR)
+                    .build();
         }
-        throw new CouponSystemException(ErrMsg.ADMIN_LOGIN_ERROR);
-
+        throw new CouponSystemException(ErrMsg.LOGIN_FAILED);
     }
 
     @Override
