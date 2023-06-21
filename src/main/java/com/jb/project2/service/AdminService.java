@@ -19,6 +19,7 @@ public interface AdminService {
     void updateCompany(Company company) throws CouponSystemException;
 
     void deleteCompany(int companyID) throws CouponSystemException;
+    void deleteCompanyCoupons(int companyId) throws CouponSystemException;
 
     List<Company> getAllCompanies();
 

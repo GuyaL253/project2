@@ -4,6 +4,7 @@ import com.jb.project2.beans.Category;
 import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Coupon;
 import com.jb.project2.beans.Customer;
+import com.jb.project2.security.LoginManager;
 import com.jb.project2.service.*;
 import com.jb.project2.utills.Art;
 import lombok.RequiredArgsConstructor;
@@ -20,12 +21,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Order(1)
 public class Init implements CommandLineRunner {
-    //            LoginInfo loginAdminDto = LoginInfo.builder()
-//                    .email("admin@admin.com")
-//                    .password("admin")
-//                    .clientType(ClientType.ADMINISTRATOR)
-//                    .build();
-//             loginManager.login(loginAdminDto);
     private final LoginManager loginManager;
 
     @Override

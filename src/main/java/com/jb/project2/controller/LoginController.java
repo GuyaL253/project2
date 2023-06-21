@@ -3,7 +3,7 @@ package com.jb.project2.controller;
 import com.jb.project2.dto.LoginReqDto;
 import com.jb.project2.dto.LoginResDto;
 import com.jb.project2.exeptions.CouponSystemException;
-import com.jb.project2.service.LoginManager;
+import com.jb.project2.security.LoginManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

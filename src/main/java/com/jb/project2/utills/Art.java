@@ -1,158 +1,96 @@
 package com.jb.project2.utills;
 
+import com.jb.project2.beans.Company;
+import com.jb.project2.beans.Coupon;
 import com.jb.project2.beans.Customer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class Art {
     private static int count = 1;
 
-    public static void  controlDescription(String txt){
-        System.out.println(txt);
+    public static void printBad(String message) {
+        System.out.println("\u001B[31m" + message + "\u001B[0m");
     }
 
-    public static void print(String text) {
-        // ANSI escape code for yellow color
-        final String ANSI_YELLOW = "\u001B[33m";
-        // ANSI escape code for resetting the color
-        final String ANSI_RESET = "\u001B[0m";
-
-        // Print the text in yellow
-        System.out.println(ANSI_YELLOW + text + ANSI_RESET);
+    public static void printGood(String message) {
+        System.out.println("\u001B[32m" + message + "\u001B[0m");
     }
 
-    public static void printCompany(Customer text) {
-        // ANSI escape code for yellow color
-        final String ANSI_YELLOW = "\u001B[33m";
-        // ANSI escape code for resetting the color
-        final String ANSI_RESET = "\u001B[0m";
-
-        // Print the text in yellow
-        System.out.println(ANSI_YELLOW + text + ANSI_RESET);
+    public static void printCompanyDetails(Company company) {
+        System.out.print("\u001B[36mCompany Details:\u001B[0m");
+        System.out.print(" \u001B[34mCompany ID:\u001B[0m " + company.getCompanyId());
+        System.out.print(" \u001B[34mName:\u001B[0m " + company.getName());
+        System.out.print(" \u001B[34mEmail:\u001B[0m " + company.getEmail());
+        System.out.println(" \u001B[34mPassword:\u001B[0m " + company.getPassword());
+        System.out.println("\u001B[34mCoupons:\u001B[0m");
+        for (Coupon coupon : company.getCoupons()) {
+            System.out.print("  \u001B[33mCoupon ID:\u001B[0m " + coupon.getCouponId());
+            System.out.print(" \u001B[33mTitle:\u001B[0m " + coupon.getTitle());
+            System.out.print(" \u001B[33mDescription:\u001B[0m " + coupon.getDescription());
+            System.out.print(" \u001B[33mStart Date:\u001B[0m " + coupon.getStartDate());
+            System.out.print(" \u001B[33mEnd Date:\u001B[0m " + coupon.getEndDate());
+            System.out.print(" \u001B[33mAmount:\u001B[0m " + coupon.getAmount());
+            System.out.print(" \u001B[33mPrice:\u001B[0m " + coupon.getPrice());
+            System.out.println(" \u001B[33mImage:\u001B[0m " + coupon.getImage());
+        }
+        System.out.println();
     }
 
-    public static void printCustomer(Customer text) {
-        // ANSI escape code for yellow color
-        final String ANSI_YELLOW = "\u001B[33m";
-        // ANSI escape code for resetting the color
-        final String ANSI_RESET = "\u001B[0m";
-
-        // Print the text in yellow
-        System.out.println(ANSI_YELLOW + text + ANSI_RESET);
+    public static void printCustomerDetails(Customer customer) {
+        System.out.print("\u001B[36mCustomer Details:\u001B[0m");
+        System.out.print(" \u001B[34mCustomer ID:\u001B[0m " + customer.getCustomerId());
+        System.out.print(" \u001B[34mFirst Name:\u001B[0m " + customer.getFirstName());
+        System.out.print(" \u001B[34mLast Name:\u001B[0m " + customer.getLastName());
+        System.out.print(" \u001B[34mEmail:\u001B[0m " + customer.getEmail());
+        System.out.println(" \u001B[34mPassword:\u001B[0m " + customer.getPassword());
+        System.out.println("\u001B[34mCoupons:\u001B[0m");
+        for (Coupon coupon : customer.getCoupons()) {
+            System.out.print("  \u001B[33mCoupon ID:\u001B[0m " + coupon.getCouponId());
+            System.out.print(" \u001B[33mTitle:\u001B[0m " + coupon.getTitle());
+            System.out.print(" \u001B[33mDescription:\u001B[0m " + coupon.getDescription());
+            System.out.print(" \u001B[33mStart Date:\u001B[0m " + coupon.getStartDate());
+            System.out.print(" \u001B[33mEnd Date:\u001B[0m " + coupon.getEndDate());
+            System.out.print(" \u001B[33mAmount:\u001B[0m " + coupon.getAmount());
+            System.out.print(" \u001B[33mPrice:\u001B[0m " + coupon.getPrice());
+            System.out.println(" \u001B[33mImage:\u001B[0m " + coupon.getImage());
+        }
+        System.out.println();
     }
 
-
-    public static final String CATEGORIES = """
-
-                        _                        _          \s
-               ___ __ _| |_ ___  __ _  ___  _ __(_) ___  ___\s
-              / __/ _` | __/ _ \\/ _` |/ _ \\| '__| |/ _ \\/ __|
-             | (_| (_| | ||  __/ (_| | (_) | |  | |  __/\\__ \\
-              \\___\\__,_|\\__\\___|\\__, |\\___/|_|  |_|\\___||___/
-                                |___/                       \s
-            """;
-    public static final String COUPONS = """
-
-               ____ ___  _   _ ____   ___  _   _ ____ \s
-              / ___/ _ \\| | | |  _ \\ / _ \\| \\ | / ___|\s
-             | |  | | | | | | | |_) | | | |  \\| \\___ \\\s
-             | |__| |_| | |_| |  __/| |_| | |\\  |___) |
-              \\____\\___/ \\___/|_|    \\___/|_| \\_|____/\s
-                                                      \s
-            """;
-
-    public static final String CUSTOMERS = """
-
-               ____ _   _ ____ _____ ___  __  __ _____ ____  ____ \s
-              / ___| | | / ___|_   _/ _ \\|  \\/  | ____|  _ \\/ ___|\s
-             | |   | | | \\___ \\ | || | | | |\\/| |  _| | |_) \\___ \\\s
-             | |___| |_| |___) || || |_| | |  | | |___|  _ < ___) |
-              \\____|\\___/|____/ |_| \\___/|_|  |_|_____|_| \\_\\____/\s
-                                                                  \s
-            """;
-
-    public static final String COMPANIES = """
-
-               ____ ___  __  __ ____   _    _   _ ___ _____ ____ \s
-              / ___/ _ \\|  \\/  |  _ \\ / \\  | \\ | |_ _| ____/ ___|\s
-             | |  | | | | |\\/| | |_) / _ \\ |  \\| || ||  _| \\___ \\\s
-             | |__| |_| | |  | |  __/ ___ \\| |\\  || || |___ ___) |
-              \\____\\___/|_|  |_|_| /_/   \\_\\_| \\_|___|_____|____/\s
-                                                                 \s
-            """;
 
     public static void START() {
         System.out.println("""
-                 
-                          
-                 ██████╗ ██████╗ ██╗   ██╗██████╗  ██████╗ ███╗   ██╗    ███████╗██╗   ██╗███████╗████████╗███████╗███╗   ███╗    ███████╗████████╗ █████╗ ██████╗ ████████╗███████╗██████╗\s
+                            
+                               
+                 ██████╗ ██████╗ ██╗   ██╗██████╗  ██████╗ ███╗   ██╗    ███████╗██╗   ██╗███████╗████████╗███████╗███╗   ███╗    ███████╗████████╗ █████╗ ██████╗ ████████╗███████╗██████╗
                 ██╔════╝██╔═══██╗██║   ██║██╔══██╗██╔═══██╗████╗  ██║    ██╔════╝╚██╗ ██╔╝██╔════╝╚══██╔══╝██╔════╝████╗ ████║    ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██╔════╝██╔══██╗
                 ██║     ██║   ██║██║   ██║██████╔╝██║   ██║██╔██╗ ██║    ███████╗ ╚████╔╝ ███████╗   ██║   █████╗  ██╔████╔██║    ███████╗   ██║   ███████║██████╔╝   ██║   █████╗  ██║  ██║
                 ██║     ██║   ██║██║   ██║██╔═══╝ ██║   ██║██║╚██╗██║    ╚════██║  ╚██╔╝  ╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║    ╚════██║   ██║   ██╔══██║██╔══██╗   ██║   ██╔══╝  ██║  ██║
                 ╚██████╗╚██████╔╝╚██████╔╝██║     ╚██████╔╝██║ ╚████║    ███████║   ██║   ███████║   ██║   ███████╗██║ ╚═╝ ██║    ███████║   ██║   ██║  ██║██║  ██║   ██║   ███████╗██████╔╝
-                 ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═══╝    ╚══════╝   ╚═╝   ╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═════╝\s
-                                                                                                                                                                                           \s""".replace("█", "\033[31m█\033[0m").indent(4));
+                 ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═══╝    ╚══════╝   ╚═╝   ╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═════╝
+                                                                                                                                                                                           """.replace("█", "\033[31m█\033[0m").indent(4));
     }
 
 
     public static void END() {
         System.out.println("""
-                 
-                 
-                 
-                 \033[32m██████╗ ██████╗ ██╗   ██╗██████╗  ██████╗ ███╗   ██╗    ███████╗██╗   ██╗███████╗████████╗███████╗███╗   ███╗    ███████╗███╗   ██╗██████╗ ███████╗██████╗\033[0m\s
-                \033[32m██╔════╝██╔═══██╗██║   ██║██╔══██╗██╔═══██╗████╗  ██║    ██╔════╝╚██╗ ██╔╝██╔════╝╚══██╔══╝██╔════╝████╗ ████║    ██╔════╝████╗  ██║██╔══██╗██╔════╝██╔══██╗\033[0m\s
-                \033[32m██║     ██║   ██║██║   ██║██████╔╝██║   ██║██╔██╗ ██║    ███████╗ ╚████╔╝ ███████╗   ██║   █████╗  ██╔████╔██║    █████╗  ██╔██╗ ██║██║  ██║█████╗  ██║  ██║\033[0m\s
-                \033[32m██║     ██║   ██║██║   ██║██╔═══╝ ██║   ██║██║╚██╗██║    ╚════██║  ╚██╔╝  ╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║    ██╔══╝  ██║╚██╗██║██║  ██║██╔══╝  ██║  ██║\033[0m\s
-                \033[32m╚██████╗╚██████╔╝╚██████╔╝██║     ╚██████╔╝██║ ╚████║    ███████║   ██║   ███████║   ██║   ███████╗██║ ╚═╝ ██║    ███████╗██║ ╚████║██████╔╝███████╗██████╔╝\033[0m\s
-                 \033[32m╚═════╝ ╚═════╝  ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═══╝    ╚══════╝   ╚═╝   ╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚══════╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═════╝\033[0m\s
-                                                                                                                                           \s""".replace("█", "\033[32m█\033[0m").indent(4));
+                            
+                            
+                 \033[32m██████╗ ██████╗ ██╗   ██╗██████╗  ██████╗ ███╗   ██╗    ███████╗██╗   ██╗███████╗████████╗███████╗███╗   ███╗    ███████╗███╗   ██╗██████╗ ███████╗██████╗\033[0m
+                \033[32m██╔════╝██╔═══██╗██║   ██║██╔══██╗██╔═══██╗████╗  ██║    ██╔════╝╚██╗ ██╔╝██╔════╝╚══██╔══╝██╔════╝████╗ ████║    ██╔════╝████╗  ██║██╔══██╗██╔════╝██╔══██╗\033[0m
+                \033[32m██║     ██║   ██║██║   ██║██████╔╝██║   ██║██╔██╗ ██║    ███████╗ ╚████╔╝ ███████╗   ██║   █████╗  ██╔████╔██║    █████╗  ██╔██╗ ██║██║  ██║█████╗  ██║  ██║\033[0m
+                \033[32m██║     ██║   ██║██║   ██║██╔═══╝ ██║   ██║██║╚██╗██║    ╚════██║  ╚██╔╝  ╚════██║   ██║   ██╔══╝  ██║╚██╔╝██║    ██╔══╝  ██║╚██╗██║██║  ██║██╔══╝  ██║  ██║\033[0m
+                \033[32m╚██████╗╚██████╔╝╚██████╔╝██║     ╚██████╔╝██║ ╚████║    ███████║   ██║   ███████║   ██║   ███████╗██║ ╚═╝ ██║    ███████╗██║ ╚████║██████╔╝███████╗██████╔╝\033[0m
+                 \033[32m╚═════╝ ╚═════╝  ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═══╝    ╚══════╝   ╚═╝   ╚══════╝   ╚═╝   ╚══════╝╚═╝     ╚═╝    ╚══════╝╚═╝  ╚═══╝╚═════╝ ╚══════╝╚═════╝\033[0m
+                                                                                                                                       """.replace("█", "\033[32m█\033[0m").indent(4));
     }
 
-
-    public static void StartCustomerTest() {
-        System.out.println("""
-                 
-                 
-                 
-                 ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗███████╗██████╗     ████████╗███████╗███████╗████████╗███████╗
-                ██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║██╔════╝██╔══██╗    ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔════╝
-                ██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║█████╗  ██████╔╝       ██║   █████╗  ███████╗   ██║   ███████╗
-                ██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗       ██║   ██╔══╝  ╚════██║   ██║   ╚════██║
-                ╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║       ██║   ███████╗███████║   ██║   ███████║
-                 ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝       ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝
-                                                                                                                                   \s""");
-    }
-
-    public static void StartAdminTest() {
-        System.out.println("""
-                 
-                 
-                 
-                 █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗    ████████╗███████╗███████╗████████╗███████╗
-                ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║    ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔════╝
-                ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║       ██║   █████╗  ███████╗   ██║   ███████╗
-                ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║       ██║   ██╔══╝  ╚════██║   ██║   ╚════██║
-                ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║       ██║   ███████╗███████║   ██║   ███████║
-                ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝       ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝
-                                                                                                     \s""");
-    }
-
-    public static void StartCompanyTest() {
-        System.out.println("""
-                 ██████╗ ██████╗ ███╗   ███╗██████╗  █████╗ ███╗   ██╗██╗   ██╗    ████████╗███████╗███████╗████████╗███████╗
-                ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔══██╗████╗  ██║╚██╗ ██╔╝    ╚══██╔══╝██╔════╝██╔════╝╚══██╔══╝██╔════╝
-                ██║     ██║   ██║██╔████╔██║██████╔╝███████║██╔██╗ ██║ ╚████╔╝        ██║   █████╗  ███████╗   ██║   ███████╗
-                ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██╔══██║██║╚██╗██║  ╚██╔╝         ██║   ██╔══╝  ╚════██║   ██║   ╚════██║
-                ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ██║  ██║██║ ╚████║   ██║          ██║   ███████╗███████║   ██║   ███████║
-                 ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝          ╚═╝   ╚══════╝╚══════╝   ╚═╝   ╚══════╝
-                                                                                                                            \s""");
-
-
-    }
 
     public static void DailyCheckForExpiredCoupons() {
         long now = System.currentTimeMillis();
@@ -198,7 +136,14 @@ public class Art {
     }
 
     public static void sperator() {
-        System.out.println("========================================================================================================================");
+        System.out.println("""
+                                                                                                               \s
+                                                                                                               \s
+                █████ █████ █████ █████ █████ █████ █████ █████ █████ █████ █████ █████ █████ █████ █████ █████ 
+                                                                                                                
+                                                                                                               \s
+                                                                                                               \s
+                                                                                                               \s""");
     }
 
     public static void DATABASE_READY() {
@@ -240,36 +185,122 @@ public class Art {
                                                                        \s""";
 
     public final static String ADMIN_METHODS = """
+             
+             
              █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗    ███╗   ███╗███████╗████████╗██╗  ██╗ ██████╗ ██████╗ ███████╗      \s
             ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║    ████╗ ████║██╔════╝╚══██╔══╝██║  ██║██╔═══██╗██╔══██╗██╔════╝    ██╗
             ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║    ██╔████╔██║█████╗     ██║   ███████║██║   ██║██║  ██║███████╗    ╚═╝
             ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║    ██║╚██╔╝██║██╔══╝     ██║   ██╔══██║██║   ██║██║  ██║╚════██║    ██╗
             ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║╚██████╔╝██████╔╝███████║    ╚═╝
             ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝      \s
+                                                                                                                       
+                                                                                                                       
+                                                                                                                       
                                                                                                                            \s""";
 
-    public final static void COMPANIES_METHODS(){
+    public final static void COMPANIES_METHODS() {
+        System.out.println(
+                """
+
+
+                        ██████╗ ██████╗ ███╗   ███╗██████╗  █████╗ ███╗   ██╗██╗███████╗███████╗    ███╗   ███╗███████╗████████╗██╗  ██╗ ██████╗ ██████╗ ███████╗
+                        ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔══██╗████╗  ██║██║██╔════╝██╔════╝    ████╗ ████║██╔════╝╚══██╔══╝██║  ██║██╔═══██╗██╔══██╗██╔════╝
+                        ██║     ██║   ██║██╔████╔██║██████╔╝███████║██╔██╗ ██║██║█████╗  ███████╗    ██╔████╔██║█████╗     ██║   ███████║██║   ██║██║  ██║███████╗
+                        ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██╔══██║██║╚██╗██║██║██╔══╝  ╚════██║    ██║╚██╔╝██║██╔══╝     ██║   ██╔══██║██║   ██║██║  ██║╚════██║
+                        ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ██║  ██║██║ ╚████║██║███████╗███████║    ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║╚██████╔╝██████╔╝███████║
+                         ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚══════╝    ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝
+                        """
+        );
+    }
+
+
+    public final static void CUSTOMERS_METHODS() {
         System.out.println("""
-                            ██████╗ ██████╗ ███╗   ███╗██████╗  █████╗ ███╗   ██╗██╗███████╗███████╗    ███╗   ███╗███████╗████████╗██╗  ██╗ ██████╗ ██████╗ ███████╗      \\s
-                            ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔══██╗████╗  ██║██║██╔════╝██╔════╝    ████╗ ████║██╔════╝╚══██╔══╝██║  ██║██╔═══██╗██╔══██╗██╔════╝    ██╗
-                            ██║     ██║   ██║██╔████╔██║██████╔╝███████║██╔██╗ ██║██║█████╗  ███████╗    ██╔████╔██║█████╗     ██║   ███████║██║   ██║██║  ██║███████╗    ╚═╝
-                            ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██╔══██║██║╚██╗██║██║██╔══╝  ╚════██║    ██║╚██╔╝██║██╔══╝     ██║   ██╔══██║██║   ██║██║  ██║╚════██║    ██╗
-                            ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ██║  ██║██║ ╚████║██║███████╗███████║    ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║╚██████╔╝██████╔╝███████║    ╚═╝
-                             ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚══════╝    ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝      \\s
-                                                                                                                                                                            \\s""\";
+                 
+                 
+                 ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗███████╗██████╗ ███████╗    ███╗   ███╗███████╗████████╗██╗  ██╗ ██████╗ ██████╗ ███████╗      \s
+                ██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║██╔════╝██╔══██╗██╔════╝    ████╗ ████║██╔════╝╚══██╔══╝██║  ██║██╔═══██╗██╔══██╗██╔════╝    ██╗
+                ██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║█████╗  ██████╔╝███████╗    ██╔████╔██║█████╗     ██║   ███████║██║   ██║██║  ██║███████╗    ╚═╝
+                ██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗╚════██║    ██║╚██╔╝██║██╔══╝     ██║   ██╔══██║██║   ██║██║  ██║╚════██║    ██╗
+                ╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║███████║    ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║╚██████╔╝██████╔╝███████║    ╚═╝
+                 ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝      \s
                 """);
     }
 
-    public final static void CUSTOMERS_METHODS(){
-        System.out.println("""
-             ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗███████╗██████╗ ███████╗    ███╗   ███╗███████╗████████╗██╗  ██╗ ██████╗ ██████╗ ███████╗      \s
-            ██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║██╔════╝██╔══██╗██╔════╝    ████╗ ████║██╔════╝╚══██╔══╝██║  ██║██╔═══██╗██╔══██╗██╔════╝    ██╗
-            ██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║█████╗  ██████╔╝███████╗    ██╔████╔██║█████╗     ██║   ███████║██║   ██║██║  ██║███████╗    ╚═╝
-            ██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗╚════██║    ██║╚██╔╝██║██╔══╝     ██║   ██╔══██║██║   ██║██║  ██║╚════██║    ██╗
-            ╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║███████║    ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║╚██████╔╝██████╔╝███████║    ╚═╝
-             ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝      \s
-            """);
+    public final static void BEFORE() {
+        System.out.println();
+        System.out.println("\033[34m" + """
+                ░█▀▄░█▀▀░█▀▀░█▀█░█▀▄░█▀▀
+                ░█▀▄░█▀▀░█▀▀░█░█░█▀▄░█▀▀
+                ░▀▀░░▀▀▀░▀░░░▀▀▀░▀░▀░▀▀▀""" + "\033[0m");
+        System.out.println();
     }
+
+    public final static void AFTER() {
+        System.out.println();
+        System.out.println("\033[34m" + """
+                ░█▀█░█▀▀░▀█▀░█▀▀░█▀▄
+                ░█▀█░█▀▀░░█░░█▀▀░█▀▄
+                ░▀░▀░▀░░░░▀░░▀▀▀░▀░▀""" + "\033[0m");
+        System.out.println();
+    }
+
+    private static int counter = 1;
+
+    public static void goodTest(String title) {
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+        String formattedTime = currentTime.format(formatter);
+        System.out.printf("""
+
+                \u001B[32m>>>>>>>>>>>> Test %03d - %s (%s)
+
+                \u001B[0m""", counter++, title, formattedTime);
+    }
+
+    public static void badTest(String title) {
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a");
+        String formattedTime = currentTime.format(formatter);
+        System.out.printf("""
+
+                \u001B[31m>>>>>>>>>>>> Test %03d - %s (%s)
+
+                \u001B[0m""", counter++, title, formattedTime);
+    }
+    private static int companyCount = 0;
+
+    public static void printCompaniesDetails(List<Company> companies) {
+        for (int i = 0; i < companies.size(); i += 3) {
+            Art.printCompanyDetails(companies.get(i));
+            companyCount++;
+            if (i + 1 < companies.size()) {
+                Art.printCompanyDetails(companies.get(i + 1));
+                companyCount++;
+            }
+            if (i + 2 < companies.size()) {
+                Art.printCompanyDetails(companies.get(i + 2));
+                companyCount++;
+            }
+            if (companyCount % 3 == 0) {
+                System.out.println();
+            }
+        }
+    }
+
+    public static void printCustomersDetails(List<Customer> customers) {
+        for (int i = 0; i < customers.size(); i += 3) {
+            Art.printCustomerDetails(customers.get(i));
+            if (i + 1 < customers.size()) {
+                Art.printCustomerDetails(customers.get(i + 1));
+            }
+            if (i + 2 < customers.size()) {
+                Art.printCustomerDetails(customers.get(i + 2));
+            }
+            System.out.println();
+        }
+    }
+
 
 }
 

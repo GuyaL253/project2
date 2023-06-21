@@ -1,10 +1,11 @@
-package com.jb.project2.service;
+package com.jb.project2.security;
 
 
 import com.jb.project2.dto.LoginReqDto;
 import com.jb.project2.dto.LoginResDto;
 import com.jb.project2.exeptions.CouponSystemException;
 import com.jb.project2.exeptions.ErrMsg;
+import com.jb.project2.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

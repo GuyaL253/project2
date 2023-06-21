@@ -85,7 +85,6 @@ public class AdminServiceImpl extends ClientService implements AdminService {
 
     @Override
     public void updateCompany(Company company) throws CouponSystemException {
-        //System.out.println(company);
         if ((companyRepository.findByCompanyIdAndName(company.getCompanyId(), company.getName())) == null) {
             throw new CouponSystemException(ErrMsg.UPDATE_FAILED_CANNOT_EDIT_ID_NAME);
         }
@@ -98,14 +97,33 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         if (company.getEmail().length() < 10) {
             throw new CouponSystemException(ErrMsg.COMPANY_EMAIL_MINIMUM_10_NOTES_LONG);
         }
+
+        // Retrieve the existing company from the database
+        Optional<Company> existingCompanyOptional = companyRepository.findById(company.getCompanyId());
+        if (existingCompanyOptional.isEmpty()) {
+            throw new CouponSystemException(ErrMsg.COMPANY_NOT_FOUND);
+        }
+        Company existingCompany = existingCompanyOptional.get();
+
+        // Keep the existing coupons
+        List<Coupon> existingCoupons = existingCompany.getCoupons();
+        company.setCoupons(existingCoupons);
+
+        // Perform the update
         companyRepository.save(company);
     }
+
 
     @Override
     public void deleteCompany(int companyID) throws CouponSystemException {
         Company companyForDelete = companyRepository.findById(companyID).orElseThrow(() -> new CouponSystemException(ErrMsg.DELETE_FAILED_COMPANY_NOT_FOUND));
         companyForDelete.getCoupons().forEach(coupon -> companyRepository.deleteById(coupon.getCouponId()));
         companyRepository.delete(companyForDelete);
+    }
+
+    @Override
+    public void deleteCompanyCoupons(int companyId) throws CouponSystemException {
+        couponRepository.deleteByCompanyId(companyId);
     }
 
     @Override
@@ -181,8 +199,23 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         if (customer.getPassword().length() < 10) {
             throw new CouponSystemException(ErrMsg.PASSWORD_MINIMUM_10_NOTES_LONG);
         }
+
+
+        // Retrieve the existing customer from the database
+        Optional<Customer> existingCustomerOptional = customerRepository.findById(customer.getCustomerId());
+        if (existingCustomerOptional.isEmpty()) {
+            throw new CouponSystemException(ErrMsg.DB_UPDATE_FAILED_CUSTOMER_NOT_FOUND);
+        }
+        Customer existingCustomer = existingCustomerOptional.get();
+
+        // Keep the existing coupons
+        List<Coupon> existingCoupons = existingCustomer.getCoupons();
+        customer.setCoupons(existingCoupons);
+
+        // Perform the update
         customerRepository.save(customer);
     }
+
 
     @Override
     public void deleteCustomer(int customerId) throws CouponSystemException {
@@ -206,5 +239,6 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         }
         return customerRepository.findById(customerID);
     }
+
 }
 

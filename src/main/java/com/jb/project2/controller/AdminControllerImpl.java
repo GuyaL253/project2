@@ -6,7 +6,7 @@ import com.jb.project2.exeptions.CouponSystemException;
 import com.jb.project2.exeptions.ErrMsg;
 import com.jb.project2.service.AdminServiceImpl;
 import com.jb.project2.service.ClientType;
-import com.jb.project2.service.LoginManager;
+import com.jb.project2.security.LoginManager;
 import com.jb.project2.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
