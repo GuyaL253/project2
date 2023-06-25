@@ -12,6 +12,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 @Component
 @RequiredArgsConstructor
@@ -24,7 +25,7 @@ public class TestAdmin implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try {
-            Art.sperator();
+            Art.separator();
             System.out.print(Art.ADMIN_METHODS);
             adminImpl = (AdminServiceImpl) loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR);
 
@@ -50,7 +51,7 @@ public class TestAdmin implements CommandLineRunner {
             Art.AFTER();
             Art.printCompaniesDetails(companies);
             System.out.println();
-            Art.sperator();
+            Art.separator();
 
             try {
                 System.out.println();
@@ -68,7 +69,7 @@ public class TestAdmin implements CommandLineRunner {
             }
 
             try {
-                Art.sperator();
+                Art.separator();
                 Art.badTest("Unsuccessful company add - company email already exists in the DB");
                 Art.BEFORE();
                 Art.printCompaniesDetails(companies);
@@ -82,10 +83,10 @@ public class TestAdmin implements CommandLineRunner {
                 System.out.println("Failed to add company: " + e.getMessage());
             }
 
-            Art.sperator();
+            Art.separator();
             Art.goodTest("Successful company update of company number 1:");
             Art.BEFORE();
-            System.out.println("\u001B[34m" + adminImpl.getOneCompany(1).orElse(null) + "\u001B[0m"); // Blue color for output
+            Art.printCompanyDetails(Objects.requireNonNull(adminImpl.getOneCompany(1).orElse(null)));
             System.out.println();
             Company existingCompany = adminImpl.getOneCompany(1).orElse(null);
             if (existingCompany != null) {
@@ -102,16 +103,16 @@ public class TestAdmin implements CommandLineRunner {
             Art.AFTER();
             System.out.println();
             System.out.println("Updated Company:");
-            System.out.println("\u001B[32m" + adminImpl.getOneCompany(1).orElse(null) + "\u001B[0m"); // Green color for output
+            Art.printCompanyDetails(Objects.requireNonNull(adminImpl.getOneCompany(1).orElse(null)));
             System.out.println();
-            Art.sperator();
+            Art.separator();
 
 
             try {
                 System.out.println();
                 Art.badTest("Unsuccessful company update - can't change the company's name");
                 Art.BEFORE();
-                System.out.println(adminImpl.getOneCompany(1));
+                Art.printCompanyDetails(Objects.requireNonNull(adminImpl.getOneCompany(1).orElse(null)));
                 System.out.println();
                 Company updatedCompany2 = Company.builder().companyId(1).name("UpdatedMicrosoft").email("updatedCompany@gmail.com").password("y2524234235yy").build();
                 adminImpl.updateCompany(updatedCompany2);
@@ -122,10 +123,10 @@ public class TestAdmin implements CommandLineRunner {
             }
 
             try {
-                Art.sperator();
+                Art.separator();
                 Art.badTest("Unsuccessful company update - can't change the company's id");
                 Art.BEFORE();
-                System.out.println(adminImpl.getOneCompany(1));
+                Art.printCompanyDetails(adminImpl.getOneCompany(1).orElse(null));
                 System.out.println();
                 Company updatedCompany3 = Company.builder().companyId(2).name("UpdatedMicrosoft").email("updatedCompany@gmail.com").password("y2524234235yy").build();
                 adminImpl.updateCompany(updatedCompany3);
@@ -136,7 +137,7 @@ public class TestAdmin implements CommandLineRunner {
             }
 
             // Delete company
-            Art.sperator();
+            Art.separator();
             Art.goodTest("Successful company delete of company number 3:");
             System.out.println("In the database: please notice that all of the company coupons were deleted from the coupon table.");
             System.out.println("In the database: please notice that all of the clients' purchase history of that company's coupons were deleted from the customer-VS-coupons table.");
@@ -154,7 +155,7 @@ public class TestAdmin implements CommandLineRunner {
             Art.printCompaniesDetails(companies);
 
             System.out.println();
-            Art.sperator();
+            Art.separator();
 
 
             try {
@@ -171,20 +172,20 @@ public class TestAdmin implements CommandLineRunner {
             }
 
             // Retrieve all companies
-            Art.sperator();
+            Art.separator();
             Art.goodTest("Successful receive of all companies in the company table:");
             Art.printCompaniesDetails(companies);
             System.out.println();
-            Art.sperator();
+            Art.separator();
 
             // Retrieve one company
             System.out.println();
             Art.goodTest("Successful receive of one existing company (company number 4):");
-            System.out.println(adminImpl.getOneCompany(4));
+            Art.printCompanyDetails(Objects.requireNonNull(adminImpl.getOneCompany(4).orElse(null)));
             System.out.println();
 
             try {
-                Art.sperator();
+                Art.separator();
                 Art.badTest("Unsuccessful receive of an un-existing company (number 10)");
                 System.out.println(adminImpl.getOneCompany(10));
             } catch (Exception e) {
@@ -213,7 +214,7 @@ public class TestAdmin implements CommandLineRunner {
 
 
             try {
-                Art.sperator();
+                Art.separator();
                 Art.badTest("Unsuccessful customer add - can't add a customer with an email that already exists in the DB");
                 Art.BEFORE();
                 Art.printCustomersDetails(customers);
@@ -227,28 +228,33 @@ public class TestAdmin implements CommandLineRunner {
             }
 
             // Update customer
-            Art.sperator();
+            Art.separator();
             Art.goodTest("Successful customer update of customer number 1:");
             Art.BEFORE();
-            System.out.println(adminImpl.getOneCustomer(1));
+            Art.printCustomerDetails(Objects.requireNonNull(adminImpl.getOneCustomer(1).orElse(null)));
             System.out.println();
             Customer updatedCustomer = Customer.builder().customerId(1).firstName("UpdatedFirstName").lastName("UpdatedLastName").email("updatedCustomer@gmail.com").password("password123456").build();
             adminImpl.updateCustomer(updatedCustomer);
             Art.AFTER();
-            System.out.println(adminImpl.getOneCustomer(1));
+            Art.printCustomerDetails(Objects.requireNonNull(adminImpl.getOneCustomer(1).orElse(null)));
             System.out.println();
-            Art.sperator();
+            Art.separator();
 
             try {
                 System.out.println();
                 Art.badTest("Unsuccessful customer update - can't change the customer's id");
                 Art.BEFORE();
-                System.out.println(adminImpl.getOneCustomer(2));
+                Art.printCustomerDetails(Objects.requireNonNull(adminImpl.getOneCustomer(2).orElse(null)));
                 System.out.println();
-                Customer updatedCustomer2 = Customer.builder().customerId(1).firstName("UpdatedFirstName").lastName("UpdatedLastName").email("updatedCustomer@gmail.com").password("password123456").build();
+                Customer updatedCustomer2 = Customer.builder()
+                        .customerId(1).
+                        firstName("UpdatedFirstName").
+                        lastName("UpdatedLastName")
+                        .email("updatedCustomer@gmail.com")
+                        .password("password123456").build();
                 adminImpl.updateCustomer(updatedCustomer2);
                 Art.AFTER();
-                System.out.println(adminImpl.getOneCustomer(2));
+                Art.printCustomerDetails(Objects.requireNonNull(adminImpl.getOneCustomer(2).orElse(null)));
             } catch (Exception e) {
                 System.out.println("Failed to update customer: " + e.getMessage());
 //                todo semek aars
@@ -256,7 +262,7 @@ public class TestAdmin implements CommandLineRunner {
 
 
             // Delete customer
-            Art.sperator();
+            Art.separator();
             Art.goodTest("Successful customer delete of customer number 5:");
             System.out.println("In the database: please notice that all of the customer's purchase history of coupons were deleted from the customer-VS-coupons table.");
             System.out.println();
@@ -268,7 +274,7 @@ public class TestAdmin implements CommandLineRunner {
             customers = adminImpl.getAllCustomers(); // Update the customers list after adding the new customer
             Art.printCustomersDetails(customers);
             System.out.println();
-            Art.sperator();
+            Art.separator();
 
             try {
                 System.out.println();
@@ -288,16 +294,16 @@ public class TestAdmin implements CommandLineRunner {
             Art.goodTest("Successful receive of all customers in the customer table:");
             Art.printCustomersDetails(customers);
             System.out.println();
-            Art.sperator();
+            Art.separator();
 
             // Retrieve one customer
             System.out.println();
             Art.goodTest("Successful receive of one existing customer (customer number 3):");
-            System.out.println(adminImpl.getOneCustomer(3));
+            Art.printCustomerDetails(adminImpl.getOneCustomer(3).orElse(null));
             System.out.println();
 
             try {
-                Art.sperator();
+                Art.separator();
                 Art.badTest("Unsuccessful receive of an un-existing customer (number 159)");
                 System.out.println(adminImpl.getOneCustomer(159));
             } catch (Exception e) {

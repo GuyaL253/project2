@@ -154,6 +154,7 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
 
     @Override
     public void deleteCoupon(int couponId) throws CouponSystemException {
+        System.out.println("a");
         if (!couponRepository.existsById(couponId)) {
             throw new CouponSystemException(ErrMsg.DELETE_FAILED_COUPON_NOT_FOUND);
         }
@@ -161,9 +162,13 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
         if (companyLoggedIn.getCompanyId() != couponForDelete.get().getCompanyId()) {
             throw new CouponSystemException(ErrMsg.DELETE_FAILED_CANNOT_DELETE_OTHER_COMPANY_COUPON);
         }
+        System.out.println("b");
         couponRepository.deleteByCouponId(couponId);
+        System.out.println("c");
         couponRepository.deleteByCouponsId(couponId);
+        System.out.println("d");
         couponRepository.deleteById(couponId);
+        System.out.println("e");
     }
 
     @Override

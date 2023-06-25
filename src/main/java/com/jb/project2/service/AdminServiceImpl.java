@@ -200,7 +200,6 @@ public class AdminServiceImpl extends ClientService implements AdminService {
             throw new CouponSystemException(ErrMsg.PASSWORD_MINIMUM_10_NOTES_LONG);
         }
 
-
         // Retrieve the existing customer from the database
         Optional<Customer> existingCustomerOptional = customerRepository.findById(customer.getCustomerId());
         if (existingCustomerOptional.isEmpty()) {
@@ -208,13 +207,20 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         }
         Customer existingCustomer = existingCustomerOptional.get();
 
-        // Keep the existing coupons
-        List<Coupon> existingCoupons = existingCustomer.getCoupons();
-        customer.setCoupons(existingCoupons);
+        // Check if the customer's ID is being changed
+        if (customer.getCustomerId() != existingCustomer.getCustomerId()) {
+            throw new CouponSystemException(ErrMsg.CUSTOMER_ID_CHANGE_NOT_ALLOWED);
+        }
 
         // Perform the update
-        customerRepository.save(customer);
+        existingCustomer.setFirstName(customer.getFirstName());
+        existingCustomer.setLastName(customer.getLastName());
+        existingCustomer.setEmail(customer.getEmail());
+        existingCustomer.setPassword(customer.getPassword());
+
+        customerRepository.save(existingCustomer);
     }
+
 
 
     @Override

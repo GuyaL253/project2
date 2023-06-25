@@ -62,7 +62,19 @@ public class Art {
         }
         System.out.println();
     }
-
+    public static void printCouponDetails(Coupon coupon) {
+        System.out.print("\u001B[36mCoupon Details:\u001B[0m");
+        System.out.print(" \u001B[33mCoupon ID:\u001B[0m " + coupon.getCouponId());
+        System.out.print(" \u001B[33mCompany ID:\u001B[0m " + coupon.getCompanyId());
+        System.out.print(" \u001B[33mCategory:\u001B[0m " + coupon.getCategory());
+        System.out.print(" \u001B[33mTitle:\u001B[0m " + coupon.getTitle());
+        System.out.print(" \u001B[33mDescription:\u001B[0m " + coupon.getDescription());
+        System.out.print(" \u001B[33mStart Date:\u001B[0m " + coupon.getStartDate());
+        System.out.print(" \u001B[33mEnd Date:\u001B[0m " + coupon.getEndDate());
+        System.out.print(" \u001B[33mAmount:\u001B[0m " + coupon.getAmount());
+        System.out.print(" \u001B[33mPrice:\u001B[0m " + coupon.getPrice());
+        System.out.println(" \u001B[33mImage:\u001B[0m " + coupon.getImage());
+    }
 
     public static void START() {
         System.out.println("""
@@ -135,7 +147,7 @@ public class Art {
 
     }
 
-    public static void sperator() {
+    public static void separator() {
         System.out.println("""
                                                                                                                \s
                                                                                                                \s
@@ -300,6 +312,8 @@ public class Art {
             System.out.println();
         }
     }
+
+
 
 
 }

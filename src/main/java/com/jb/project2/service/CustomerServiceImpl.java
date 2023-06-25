@@ -9,6 +9,7 @@ import com.jb.project2.exeptions.CouponSystemException;
 import com.jb.project2.exeptions.CustomException;
 import com.jb.project2.exeptions.ErrMsg;
 import com.jb.project2.security.LoginInfo;
+import com.jb.project2.utills.Art;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -94,8 +95,9 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
 
     @Override
     public void showCustomerDetails() {
-        System.out.println(customerLoggedIn);
+        Art.printCustomerDetails(customerLoggedIn);
     }
+
 
     @Override
     public void purchaseCouponForBuildingDB(int customerID, int couponID) throws CouponSystemException, CustomException {

@@ -29,7 +29,7 @@ public class Init implements CommandLineRunner {
         try {
             System.out.println();
             Art.INIT_DATABASE();
-            Art.sperator();
+            Art.separator();
             AdminServiceImpl adminImpl = (AdminServiceImpl) loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR);
 
             Company company1 = Company.builder().name("Nike").email("nike@gmail.com").password("password123456").build();
@@ -79,7 +79,7 @@ public class Init implements CommandLineRunner {
 
             Coupon coupon3 = Coupon.builder().companyId(1).category(Category.JERSEYS).title("Puma").description("Puma coupon: Get 20% off on all sports jerseys").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(57.00).image("https://example.com/puma_coupon_image.jpg").build();
 
-            Coupon coupon4 = Coupon.builder().companyId(1).category(Category.BALLS).title("Under Armor").description("Under Armor coupon: Buy any sports ball and get a free mini pump").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(1000.00).image("https://example.com/under armor_coupon_image.jpg").build();
+            Coupon coupon4 = Coupon.builder().companyId(1).category(Category.BALLS).title("Under Armor").description("Under Armor coupon: Buy any sports ball and get a free mini pump").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(1000.00).image("https://example.com/underarmor_coupon_image.jpg").build();
 
             Coupon coupon5 = Coupon.builder().companyId(2).category(Category.SHOES).title("Reebok").description("Reebok coupon: Get 15% off on all sports shoes").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(2000.00).image("https://example.com/reebok_coupon_image.jpg").build();
 
@@ -89,7 +89,7 @@ public class Init implements CommandLineRunner {
 
             Coupon coupon8 = Coupon.builder().companyId(2).category(Category.BALLS).title("Puma").description("Puma coupon: Buy any sports ball and get a free sports bag").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(2500.00).image("https://example.com/puma_coupon_image.jpg").build();
 
-            Coupon coupon9 = Coupon.builder().companyId(3).category(Category.SHOES).title("Under Armor").description("Under Armor coupon: Get 20% off on all running shoes").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(10.00).image("https://example.com/under armor_coupon_image.jpg").build();
+            Coupon coupon9 = Coupon.builder().companyId(3).category(Category.SHOES).title("Under Armor").description("Under Armor coupon: Get 20% off on all running shoes").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(10.00).image("https://example.com/underarmor_coupon_image.jpg").build();
 
             Coupon coupon10 = Coupon.builder().companyId(3).category(Category.JERSEYS).title("Reebok").description("Reebok coupon: Buy any two sports jerseys and get the third one at 50% off").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(100.00).image("https://example.com/reebok_coupon_image.jpg").build();
 
@@ -99,7 +99,7 @@ public class Init implements CommandLineRunner {
 
             Coupon coupon13 = Coupon.builder().companyId(4).category(Category.JERSEYS).title("Puma").description("Puma coupon: Buy two sports jerseys and get a sports water bottle for free").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(99.90).image("https://example.com/puma_coupon_image.jpg").build();
 
-            Coupon coupon14 = Coupon.builder().companyId(4).category(Category.BALLS).title("Under Armor").description("Under Armor coupon: Buy any two sports balls and get the third one at half price").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(0).price(500.00).image("https://example.com/under armor_coupon_image.jpg").build();
+            Coupon coupon14 = Coupon.builder().companyId(4).category(Category.BALLS).title("Under Armor").description("Under Armor coupon: Buy any two sports balls and get the third one at half price").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(0).price(500.00).image("https://example.com/underarmor_coupon_image.jpg").build();
 
             Coupon coupon15 = Coupon.builder().companyId(4).category(Category.SHOES).title("Reebok").description("Reebok coupon: Get 20% off on all running shoes").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(5.00).image("https://example.com/reebok_coupon_image.jpg").build();
 
@@ -109,7 +109,7 @@ public class Init implements CommandLineRunner {
 
             Coupon coupon18 = Coupon.builder().companyId(5).category(Category.SHOES).title("Puma").description("Puma coupon: Get 20% off on running shoes").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(5.00).image("https://example.com/puma_coupon_image.jpg").build();
 
-            Coupon coupon19 = Coupon.builder().companyId(5).category(Category.JERSEYS).title("Under Armor").description("Under Armor coupon: Buy any two sports jerseys and get the third one at half price").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(49.90).image("https://example.com/under armor_coupon_image.jpg").build();
+            Coupon coupon19 = Coupon.builder().companyId(5).category(Category.JERSEYS).title("Under Armor").description("Under Armor coupon: Buy any two sports jerseys and get the third one at half price").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(49.90).image("https://example.com/underarmor_coupon_image.jpg").build();
 
             Coupon coupon20 = Coupon.builder().companyId(5).category(Category.BALLS).title("Reebok").description("Reebok coupon: Buy a basketball and get a free basketball pump").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(53.00).image("https://example.com/reebok_coupon_image.jpg").build();
 
