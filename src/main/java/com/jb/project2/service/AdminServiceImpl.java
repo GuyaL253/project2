@@ -183,9 +183,12 @@ public class AdminServiceImpl extends ClientService implements AdminService {
 
 
     @Override
-    public void updateCustomer(Customer customer) throws CouponSystemException {
-        if (!customerRepository.existsById(customer.getCustomerId())) {
+    public void updateCustomer(int customerId, Customer customer) throws CouponSystemException {
+        if (!customerRepository.existsById(customerId)) {
             throw new CouponSystemException(ErrMsg.DB_UPDATE_FAILED_CUSTOMER_NOT_FOUND);
+        }
+        if (customerId != customer.getCustomerId()) {
+            throw new CouponSystemException(ErrMsg.CUSTOMER_ID_CHANGE_NOT_ALLOWED);
         }
         if (customer.getFirstName().length() < 3) {
             throw new CouponSystemException(ErrMsg.FIRST_NAME_MINIMUM_2_NOTES_LONG);
@@ -201,16 +204,11 @@ public class AdminServiceImpl extends ClientService implements AdminService {
         }
 
         // Retrieve the existing customer from the database
-        Optional<Customer> existingCustomerOptional = customerRepository.findById(customer.getCustomerId());
+        Optional<Customer> existingCustomerOptional = customerRepository.findById(customerId);
         if (existingCustomerOptional.isEmpty()) {
             throw new CouponSystemException(ErrMsg.DB_UPDATE_FAILED_CUSTOMER_NOT_FOUND);
         }
         Customer existingCustomer = existingCustomerOptional.get();
-
-        // Check if the customer's ID is being changed
-        if (customer.getCustomerId() != existingCustomer.getCustomerId()) {
-            throw new CouponSystemException(ErrMsg.CUSTOMER_ID_CHANGE_NOT_ALLOWED);
-        }
 
         // Perform the update
         existingCustomer.setFirstName(customer.getFirstName());
@@ -220,6 +218,7 @@ public class AdminServiceImpl extends ClientService implements AdminService {
 
         customerRepository.save(existingCustomer);
     }
+
 
 
 

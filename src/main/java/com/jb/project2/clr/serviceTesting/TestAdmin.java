@@ -32,7 +32,7 @@ public class TestAdmin implements CommandLineRunner {
             testCompanyOperations();
             testCustomerOperations();
         } catch (Exception err) {
-            System.out.println(err.getMessage());
+            Art.catchPrint(err.getMessage());
         }
 
     }
@@ -65,7 +65,7 @@ public class TestAdmin implements CommandLineRunner {
                 Art.printCompaniesDetails(companies);
 
             } catch (Exception e) {
-                Art.printBad("Failed to add company: " + e.getMessage());
+                Art.catchPrint("Failed to add company: " + e.getMessage());
             }
 
             try {
@@ -80,7 +80,7 @@ public class TestAdmin implements CommandLineRunner {
                 Art.printCompaniesDetails(companies);
 
             } catch (Exception e) {
-                System.out.println("Failed to add company: " + e.getMessage());
+                Art.catchPrint("Failed to add company: " + e.getMessage());
             }
 
             Art.separator();
@@ -119,21 +119,21 @@ public class TestAdmin implements CommandLineRunner {
                 Art.AFTER();
                 System.out.println(adminImpl.getOneCompany(1));
             } catch (Exception e) {
-                System.out.println("Failed to update company: " + e.getMessage());
+                Art.catchPrint("Failed to update company: " + e.getMessage());
             }
 
             try {
                 Art.separator();
                 Art.badTest("Unsuccessful company update - can't change the company's id");
                 Art.BEFORE();
-                Art.printCompanyDetails(adminImpl.getOneCompany(1).orElse(null));
+                Art.printCompanyDetails(Objects.requireNonNull(adminImpl.getOneCompany(1).orElse(null)));
                 System.out.println();
                 Company updatedCompany3 = Company.builder().companyId(2).name("UpdatedMicrosoft").email("updatedCompany@gmail.com").password("y2524234235yy").build();
                 adminImpl.updateCompany(updatedCompany3);
                 Art.AFTER();
                 System.out.println(adminImpl.getOneCompany(1));
             } catch (Exception e) {
-                System.out.println("Failed to update company: " + e.getMessage());
+                Art.catchPrint("Failed to update company: " + e.getMessage());
             }
 
             // Delete company
@@ -168,7 +168,7 @@ public class TestAdmin implements CommandLineRunner {
                 Art.AFTER();
                 Art.printCompaniesDetails(companies);
             } catch (Exception e) {
-                System.out.println("Failed to delete company: " + e.getMessage());
+                Art.catchPrint("Failed to delete company: " + e.getMessage());
             }
 
             // Retrieve all companies
@@ -189,7 +189,7 @@ public class TestAdmin implements CommandLineRunner {
                 Art.badTest("Unsuccessful receive of an un-existing company (number 10)");
                 System.out.println(adminImpl.getOneCompany(10));
             } catch (Exception e) {
-                System.out.println("Failed to retrieve company: " + e.getMessage());
+                Art.catchPrint("Failed to retrieve company: " + e.getMessage());
             }
 
         } catch (Exception e) {
@@ -224,7 +224,7 @@ public class TestAdmin implements CommandLineRunner {
                 Art.AFTER();
                 Art.printCustomersDetails(customers);
             } catch (Exception e) {
-                System.out.println("Failed to add customer: " + e.getMessage());
+                Art.catchPrint("Failed to add customer: " + e.getMessage());
             }
 
             // Update customer
@@ -233,12 +233,19 @@ public class TestAdmin implements CommandLineRunner {
             Art.BEFORE();
             Art.printCustomerDetails(Objects.requireNonNull(adminImpl.getOneCustomer(1).orElse(null)));
             System.out.println();
-            Customer updatedCustomer = Customer.builder().customerId(1).firstName("UpdatedFirstName").lastName("UpdatedLastName").email("updatedCustomer@gmail.com").password("password123456").build();
-            adminImpl.updateCustomer(updatedCustomer);
+            Customer updatedCustomer = Customer.builder()
+                    .customerId(1)
+                    .firstName("UpdatedFirstName")
+                    .lastName("UpdatedLastName")
+                    .email("updatedCustomer@gmail.com")
+                    .password("password123456")
+                    .build();
+            adminImpl.updateCustomer(1, updatedCustomer); // Pass the customerId as the first argument
             Art.AFTER();
             Art.printCustomerDetails(Objects.requireNonNull(adminImpl.getOneCustomer(1).orElse(null)));
             System.out.println();
             Art.separator();
+
 
             try {
                 System.out.println();
@@ -252,12 +259,11 @@ public class TestAdmin implements CommandLineRunner {
                         lastName("UpdatedLastName")
                         .email("updatedCustomer@gmail.com")
                         .password("password123456").build();
-                adminImpl.updateCustomer(updatedCustomer2);
+                adminImpl.updateCustomer(2,updatedCustomer2);
                 Art.AFTER();
                 Art.printCustomerDetails(Objects.requireNonNull(adminImpl.getOneCustomer(2).orElse(null)));
             } catch (Exception e) {
-                System.out.println("Failed to update customer: " + e.getMessage());
-//                todo semek aars
+                Art.catchPrint("Failed to update customer: " + e.getMessage());
             }
 
 
@@ -286,7 +292,7 @@ public class TestAdmin implements CommandLineRunner {
                 Art.AFTER();
                 Art.printCustomersDetails(customers);
             } catch (Exception e) {
-                System.out.println("Failed to delete customer: " + e.getMessage());
+                Art.catchPrint("Failed to delete customer: " + e.getMessage());
             }
 
             // Retrieve all customers
@@ -299,7 +305,7 @@ public class TestAdmin implements CommandLineRunner {
             // Retrieve one customer
             System.out.println();
             Art.goodTest("Successful receive of one existing customer (customer number 3):");
-            Art.printCustomerDetails(adminImpl.getOneCustomer(3).orElse(null));
+            Art.printCustomerDetails(Objects.requireNonNull(adminImpl.getOneCustomer(3).orElse(null)));
             System.out.println();
 
             try {
@@ -307,7 +313,7 @@ public class TestAdmin implements CommandLineRunner {
                 Art.badTest("Unsuccessful receive of an un-existing customer (number 159)");
                 System.out.println(adminImpl.getOneCustomer(159));
             } catch (Exception e) {
-                System.out.println("Failed to retrieve customer: " + e.getMessage());
+                Art.catchPrint("Failed to retrieve customer: " + e.getMessage());
             }
 
         } catch (Exception e) {

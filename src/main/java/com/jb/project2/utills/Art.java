@@ -14,13 +14,10 @@ import java.util.List;
 public class Art {
     private static int count = 1;
 
-    public static void printBad(String message) {
+    public static void catchPrint(String message) {
         System.out.println("\u001B[31m" + message + "\u001B[0m");
     }
 
-    public static void printGood(String message) {
-        System.out.println("\u001B[32m" + message + "\u001B[0m");
-    }
 
     public static void printCompanyDetails(Company company) {
         System.out.print("\u001B[36mCompany Details:\u001B[0m");
@@ -62,6 +59,7 @@ public class Art {
         }
         System.out.println();
     }
+
     public static void printCouponDetails(Coupon coupon) {
         System.out.print("\u001B[36mCoupon Details:\u001B[0m");
         System.out.print(" \u001B[33mCoupon ID:\u001B[0m " + coupon.getCouponId());
@@ -116,14 +114,14 @@ public class Art {
         LocalDateTime rightNow = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String formatDateTime = rightNow.format(formatter);
-        System.out.println("\u001B[36m" +
+        System.out.println("\u001B[30m" +
                 """
-                             ____             _     __                           __                   __             ____                          ______                     _                      __          ______                                                     
-                            / __ \\  ____ _   (_)   / /   __  __         _____   / /_   ___   _____   / /__          / __/  ____    _____          / ____/   _  __    ____    (_)   _____  ___   ____/ /         / ____/  ____   __  __    ____   ____    ____    _____      
-                           / / / / / __ `/  / /   / /   / / / /        / ___/  / __ \\ / _ \\ / ___/  / //_/         / /_   / __ \\  / ___/         / __/     | |/_/   / __ \\  / /   / ___/ / _ \\ / __  /         / /      / __ \\ / / / /   / __ \\ / __ \\  / __ \\  / ___/      
-                          / /_/ / / /_/ /  / /   / /   / /_/ /        / /__   / / / //  __// /__   / ,<           / __/  / /_/ / / /            / /___    _>  <    / /_/ / / /   / /    /  __// /_/ /         / /___   / /_/ // /_/ /   / /_/ // /_/ / / / / / (__  )       
-                         /_____/  \\__,_/  /_/   /_/    \\__, /         \\___/  /_/ /_/ \\___/ \\___/  /_/|_|         /_/     \\____/ /_/            /_____/   /_/|_|   / .___/ /_/   /_/     \\___/ \\__,_/          \\____/   \\____/ \\__,_/   / .___/ \\____/ /_/ /_/ /____/        
-                                                      /____/                                                                                                     /_/                                                                  /_/                                         
+                             ____             _     __                           __                   __             ____                          ______                     _                      __          ______\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040
+                            / __ \\  ____ _   (_)   / /   __  __         _____   / /_   ___   _____   / /__          / __/  ____    _____          / ____/   _  __    ____    (_)   _____  ___   ____/ /         / ____/  ____   __  __    ____   ____    ____    _____\040\040\040\040\040\040
+                           / / / / / __ `/  / /   / /   / / / /        / ___/  / __ \\ / _ \\ / ___/  / //_/         / /_   / __ \\  / ___/         / __/     | |/_/   / __ \\  / /   / ___/ / _ \\ / __  /         / /      / __ \\ / / / /   / __ \\ / __ \\  / __ \\  / ___/\040\040\040\040\040\040
+                          / /_/ / / /_/ /  / /   / /   / /_/ /        / /__   / / / //  __// /__   / ,<           / __/  / /_/ / / /            / /___    _>  <    / /_/ / / /   / /    /  __// /_/ /         / /___   / /_/ // /_/ /   / /_/ // /_/ / / / / / (__  )\040\040\040\040\040\040\040
+                         /_____/  \\__,_/  /_/   /_/    \\__, /         \\___/  /_/ /_/ \\___/ \\___/  /_/|_|         /_/     \\____/ /_/            /_____/   /_/|_|   / .___/ /_/   /_/     \\___/ \\__,_/          \\____/   \\____/ \\__,_/   / .___/ \\____/ /_/ /_/ /____/\040\040\040\040\040\040\040\040
+                                                      /____/                                                                                                     /_/                                                                  /_/\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040\040
                         """ + "\u001B[0m");
 
         System.out.println("\u001B[36m" +
@@ -187,14 +185,6 @@ public class Art {
         );
     }
 
-    public final static String ADMINISTRATOR = """
-             █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗██╗███████╗████████╗██████╗  █████╗ ████████╗ ██████╗ ██████╗\s
-            ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║██║██╔════╝╚══██╔══╝██╔══██╗██╔══██╗╚══██╔══╝██╔═══██╗██╔══██╗
-            ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║██║███████╗   ██║   ██████╔╝███████║   ██║   ██║   ██║██████╔╝
-            ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║██║╚════██║   ██║   ██╔══██╗██╔══██║   ██║   ██║   ██║██╔══██╗
-            ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║██║███████║   ██║   ██║  ██║██║  ██║   ██║   ╚██████╔╝██║  ██║
-            ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝    ╚═════╝ ╚═╝  ╚═╝
-                                                                       \s""";
 
     public final static String ADMIN_METHODS = """
              
@@ -210,7 +200,7 @@ public class Art {
                                                                                                                        
                                                                                                                            \s""";
 
-    public final static void COMPANIES_METHODS() {
+    public static void COMPANIES_METHODS() {
         System.out.println(
                 """
 
@@ -226,7 +216,7 @@ public class Art {
     }
 
 
-    public final static void CUSTOMERS_METHODS() {
+    public static void CUSTOMERS_METHODS() {
         System.out.println("""
                  
                  
@@ -239,7 +229,7 @@ public class Art {
                 """);
     }
 
-    public final static void BEFORE() {
+    public static void BEFORE() {
         System.out.println();
         System.out.println("\033[34m" + """
                 ░█▀▄░█▀▀░█▀▀░█▀█░█▀▄░█▀▀
@@ -248,7 +238,7 @@ public class Art {
         System.out.println();
     }
 
-    public final static void AFTER() {
+    public static void AFTER() {
         System.out.println();
         System.out.println("\033[34m" + """
                 ░█▀█░█▀▀░▀█▀░█▀▀░█▀▄
@@ -280,6 +270,7 @@ public class Art {
 
                 \u001B[0m""", counter++, title, formattedTime);
     }
+
     private static int companyCount = 0;
 
     public static void printCompaniesDetails(List<Company> companies) {
@@ -312,8 +303,6 @@ public class Art {
             System.out.println();
         }
     }
-
-
 
 
 }

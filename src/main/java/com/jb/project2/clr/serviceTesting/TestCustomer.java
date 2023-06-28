@@ -30,7 +30,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
             } catch (Exception e) {
-                System.out.println("Failed to retrieve customer coupons: " + e.getMessage());
+                Art.catchPrint("Failed to retrieve customer coupons: " + e.getMessage());
             }
 
             try {
@@ -41,7 +41,7 @@ public class TestCustomer implements CommandLineRunner {
                 System.out.println();
                 Art.separator();
             } catch (Exception e) {
-                System.out.println("Failed to purchase coupon: " + e.getMessage());
+                Art.catchPrint("Failed to purchase coupon: " + e.getMessage());
             }
 
             System.out.println();
@@ -50,7 +50,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
             } catch (Exception e) {
-                System.out.println("Failed to retrieve customer coupons: " + e.getMessage());
+                Art.catchPrint("Failed to retrieve customer coupons: " + e.getMessage());
             }
 
             try {
@@ -61,7 +61,7 @@ public class TestCustomer implements CommandLineRunner {
                 System.out.println();
                 Art.separator();
             } catch (Exception e) {
-                System.out.println("Failed to purchase coupon: " + e.getMessage());
+                Art.catchPrint("Failed to purchase coupon: " + e.getMessage());
             }
 
             System.out.println();
@@ -70,7 +70,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
             } catch (Exception e) {
-                System.out.println("Failed to retrieve customer coupons: " + e.getMessage());
+                Art.catchPrint("Failed to retrieve customer coupons: " + e.getMessage());
             }
 
             try {
@@ -81,7 +81,7 @@ public class TestCustomer implements CommandLineRunner {
                 System.out.println();
                 Art.separator();
             } catch (Exception e) {
-                System.out.println("Failed to purchase coupon: " + e.getMessage());
+                Art.catchPrint("Failed to purchase coupon: " + e.getMessage());
             }
 
             System.out.println();
@@ -90,7 +90,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
             } catch (Exception e) {
-                System.out.println("Failed to retrieve customer coupons: " + e.getMessage());
+                Art.catchPrint("Failed to retrieve customer coupons: " + e.getMessage());
             }
 
             try {
@@ -101,7 +101,7 @@ public class TestCustomer implements CommandLineRunner {
                 System.out.println();
                 Art.separator();
             } catch (Exception e) {
-                System.out.println("Failed to purchase coupon: " + e.getMessage());
+                Art.catchPrint("Failed to purchase coupon: " + e.getMessage());
             }
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,7 +111,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
             } catch (Exception e) {
-                System.out.println("Failed to retrieve customer coupons: " + e.getMessage());
+                Art.catchPrint("Failed to retrieve customer coupons: " + e.getMessage());
             }
 
             System.out.println();
@@ -124,7 +124,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.getCustomerCouponsByCategory(Category.SHOES).forEach(Art::printCouponDetails);
             } catch (Exception e) {
-                System.out.println("Failed to retrieve customer coupons by category: " + e.getMessage());
+                Art.catchPrint("Failed to retrieve customer coupons by category: " + e.getMessage());
             }
 
             System.out.println();
@@ -137,7 +137,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.getCustomerCouponsByMaxPrice(50).forEach(Art::printCouponDetails);
             } catch (Exception e) {
-                System.out.println("Failed to retrieve customer coupons by max price: " + e.getMessage());
+                Art.catchPrint("Failed to retrieve customer coupons by max price: " + e.getMessage());
             }
 
             System.out.println();
@@ -152,7 +152,7 @@ public class TestCustomer implements CommandLineRunner {
             Art.separator();
 
         } catch (Exception err) {
-            System.out.println(err.getMessage());
+            Art.catchPrint(err.getMessage());
         }
 
     }

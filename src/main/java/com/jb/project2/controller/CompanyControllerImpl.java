@@ -56,7 +56,7 @@ public class CompanyControllerImpl {
     @GetMapping("coupons")
     public List<Coupon> getAllCoupons(@RequestHeader("Authorization") UUID token) throws CouponSystemException {
         validateToken(token);
-        return companyService.getCompanyCoupons();
+        return companyService.getCompanyCoupons(companyService.getCompanyLoggedIn().getCompanyId());
     }
 
     @GetMapping("coupons/{couponId}")
@@ -80,6 +80,6 @@ public class CompanyControllerImpl {
     @GetMapping("details")
     public Company getCompanyDetails(@RequestHeader("Authorization") UUID token) throws CouponSystemException {
         validateToken(token);
-        return companyService.getCompanyDetails();
+        return companyService.getCompanyLoggedIn();
     }
 }

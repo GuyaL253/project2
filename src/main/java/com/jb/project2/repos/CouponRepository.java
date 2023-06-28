@@ -1,6 +1,7 @@
 package com.jb.project2.repos;
 
 import com.jb.project2.beans.Category;
+import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Coupon;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -18,6 +19,7 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
     Coupon findByCompanyIdAndCouponId(int companyId, int couponId);
     List<Coupon> findAllByCompanyIdAndCategory(int companyId ,Category category);
     List<Coupon> findAllByCompanyId(int companyId);
+//    List<Coupon> findAllByCompanyId();
     List<Coupon> findByEndDateBefore(LocalDate now);
     @Transactional
     @Modifying
@@ -31,4 +33,11 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer> {
     @Modifying
     @Query(value = "DELETE FROM companies_coupons WHERE company_company_id=:companyId", nativeQuery = true)
     void deleteByCompanyId(int companyId);
+
+//    @Transactional
+//    @Modifying
+//    @Query(value = "SELECT * FROM companies_coupons WHERE company_company_id=:companyId", nativeQuery = true)
+//    Company getCompanyCoupons(int companyId);
+
+
 }

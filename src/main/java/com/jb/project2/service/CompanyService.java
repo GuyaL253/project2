@@ -24,15 +24,11 @@ public interface CompanyService {
 
     void deleteCouponByDate(LocalDate date);
 
-    List<Coupon> getCompanyCoupons();
-
     List<Coupon> getCompanyCoupons(int companyId);
 
     List<Coupon> getCompanyCouponsByMaxPrice(double maxPrice) throws CouponSystemException;
 
     List<Coupon> getCompanyCouponsByCategory(Category category);
-
-    Company getCompanyDetails() throws CouponSystemException;
 
 
 }

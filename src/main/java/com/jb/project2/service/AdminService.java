@@ -29,7 +29,7 @@ public interface AdminService {
 
     void addCustomersListToDB(List<Customer> customers) throws CouponSystemException;
 
-    void updateCustomer(Customer customer) throws CouponSystemException;
+    void updateCustomer(int customerId ,Customer customer) throws CouponSystemException;
 
     void deleteCustomer(int customerID) throws CouponSystemException;
 

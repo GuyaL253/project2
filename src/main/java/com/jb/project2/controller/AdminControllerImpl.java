@@ -86,7 +86,7 @@ public class AdminControllerImpl {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateCustomer(@PathVariable int customerId, @RequestBody Customer customer, @RequestHeader("Authorization") UUID token) throws CouponSystemException {
         validateToken(token);
-        adminService.updateCustomer(customer);
+        adminService.updateCustomer(customerId,customer);
     }
 
     @DeleteMapping("customers/{customerId}")

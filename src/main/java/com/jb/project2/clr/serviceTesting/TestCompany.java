@@ -33,16 +33,16 @@ public class TestCompany implements CommandLineRunner {
             System.out.println();
             Art.BEFORE();
             try {
-                companiesImpl.getCompanyCoupons().forEach(Art::printCouponDetails);
+                companiesImpl.getCompanyCoupons(companiesImpl.getCompanyLoggedIn().getCompanyId()).forEach(Art::printCouponDetails);
             } catch (Exception e) {
-                System.out.println("Failed to retrieve company coupons: " + e.getMessage());
+                Art.catchPrint("Failed to retrieve company coupons: " + e.getMessage());
             }
 
             Coupon couponAdded = Coupon.builder().companyId(companiesImpl.getCompanyLoggedIn().getCompanyId()).category(Category.JERSEYS).title("Added coupon").description("Premium jerseys for just 1,000 NIS - Limited time offer!").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(1000.00).image("Image").build();
             try {
                 companiesImpl.addCoupon(couponAdded);
                 Art.AFTER();
-                companiesImpl.getCompanyCoupons().forEach(Art::printCouponDetails);
+                companiesImpl.getCompanyCoupons(companiesImpl.getCompanyLoggedIn().getCompanyId()).forEach(Art::printCouponDetails);
                 System.out.println();
                 System.out.println();
                 Art.separator();
@@ -63,7 +63,7 @@ public class TestCompany implements CommandLineRunner {
                 System.out.println();
                 Art.separator();
             } catch (Exception e) {
-                System.out.println("Failed to update coupon: " + e.getMessage());
+                Art.catchPrint("Failed to update coupon: " + e.getMessage());
             }
 
             // Delete coupon
@@ -71,20 +71,24 @@ public class TestCompany implements CommandLineRunner {
             System.out.println();
             Art.BEFORE();
             try {
-                companiesImpl.getCompanyCoupons().forEach(Art::printCouponDetails);
+                companiesImpl.getCompanyCoupons(companiesImpl.getCompanyLoggedIn().getCompanyId()).forEach(Art::printCouponDetails);
                 companiesImpl.deleteCoupon(5);
                 Art.AFTER();
-//                TODO PRINT THE SAME
-                companiesImpl.getCompanyCoupons().forEach(Art::printCouponDetails);
-                System.out.println();
-                Art.separator();
+                try {
+                    companiesImpl.getCompanyCoupons(companiesImpl.getCompanyLoggedIn().getCompanyId()).forEach(Art::printCouponDetails);
+                    System.out.println();
+                    Art.separator();
+                } catch (Exception e) {
+                    Art.catchPrint("Failed to retrieve updated company coupons: " + e.getMessage());
+                }
             } catch (Exception e) {
-                System.out.println("Failed to delete coupon: " + e.getMessage());
+                Art.catchPrint("Failed to delete coupon: " + e.getMessage());
             }
 
 
+
         } catch (Exception e) {
-            System.out.println("An error occurred: " + e.getMessage());
+            Art.catchPrint("An error occurred: " + e.getMessage());
         }
     }
 }
