@@ -2,11 +2,10 @@ package com.jb.project2.controller;
 
 import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Customer;
-import com.jb.project2.exeptions.CouponSystemException;
-import com.jb.project2.exeptions.ErrMsg;
+import com.jb.project2.exceptions.CouponSystemException;
+import com.jb.project2.exceptions.ErrMsg;
 import com.jb.project2.service.AdminServiceImpl;
 import com.jb.project2.service.ClientType;
-import com.jb.project2.security.LoginManager;
 import com.jb.project2.security.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,8 +19,6 @@ import java.util.UUID;
 @RequestMapping("api/admin")
 public class AdminControllerImpl {
 
-    @Autowired
-    private LoginManager loginManager;
     @Autowired
     private final AdminServiceImpl adminService;
     @Autowired
@@ -51,7 +48,7 @@ public class AdminControllerImpl {
     @ResponseStatus(HttpStatus.OK)
     public void updateCompany(@PathVariable int companyId, @RequestBody Company company, @RequestHeader("Authorization") UUID token) throws CouponSystemException {
         validateToken(token);
-        adminService.updateCompany(company);
+        adminService.updateCompany(companyId,company);
     }
 
     @DeleteMapping("companies/{companyId}")
@@ -86,7 +83,7 @@ public class AdminControllerImpl {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updateCustomer(@PathVariable int customerId, @RequestBody Customer customer, @RequestHeader("Authorization") UUID token) throws CouponSystemException {
         validateToken(token);
-        adminService.updateCustomer(customerId,customer);
+        adminService.updateCustomer(customerId, customer);
     }
 
     @DeleteMapping("customers/{customerId}")

@@ -41,6 +41,4 @@ public class Coupon {
 
     private String image;
 
-    //https://viridian-lightyear-075.notion.site/React-Installations-4979bcbd1d7c4c19a406de70c7a8520f
-
 }

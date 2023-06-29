@@ -2,7 +2,7 @@ package com.jb.project2.service;
 
 
 import com.jb.project2.dto.LoginResDto;
-import com.jb.project2.exeptions.CouponSystemException;
+import com.jb.project2.exceptions.CouponSystemException;
 import com.jb.project2.repos.CompanyRepository;
 import com.jb.project2.repos.CouponRepository;
 import com.jb.project2.repos.CustomerRepository;

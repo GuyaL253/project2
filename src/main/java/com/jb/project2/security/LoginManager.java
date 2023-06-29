@@ -3,13 +3,11 @@ package com.jb.project2.security;
 
 import com.jb.project2.dto.LoginReqDto;
 import com.jb.project2.dto.LoginResDto;
-import com.jb.project2.exeptions.CouponSystemException;
-import com.jb.project2.exeptions.ErrMsg;
+import com.jb.project2.exceptions.CouponSystemException;
+import com.jb.project2.exceptions.ErrMsg;
 import com.jb.project2.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;

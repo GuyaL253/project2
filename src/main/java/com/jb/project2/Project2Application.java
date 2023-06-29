@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Project2Application {
 
 	public static void main(String[] args) {
-		Art.START();
+		Art.start();
 		SpringApplication.run(Project2Application.class, args);
 		Art.localHost();
-		Art.END();
+		Art.end();
 	}
 
 }

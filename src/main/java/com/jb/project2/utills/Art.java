@@ -3,6 +3,7 @@ package com.jb.project2.utills;
 import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Coupon;
 import com.jb.project2.beans.Customer;
+import com.jb.project2.security.LoginInfo;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -10,6 +11,8 @@ import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 public class Art {
     private static int count = 1;
@@ -18,7 +21,16 @@ public class Art {
         System.out.println("\u001B[31m" + message + "\u001B[0m");
     }
 
+    public static void printTokens(Map<UUID, LoginInfo> tokens) {
+        System.out.println("\u001B[36mtokens List:\u001B[0m");
 
+        tokens.forEach((token, value) -> {
+            String coloredToken = "\u001B[36mToken:\u001B[0m " + token.toString();
+            String coloredId = "\u001B[33mValue:\u001B[0m " + value.getId();
+            String coloredClientType = "\u001B[35mClientType:\u001B[0m " + value.getClientType();
+            System.out.println(coloredToken + ", " + coloredId + ", " + coloredClientType);
+        });
+    }
     public static void printCompanyDetails(Company company) {
         System.out.print("\u001B[36mCompany Details:\u001B[0m");
         System.out.print(" \u001B[34mCompany ID:\u001B[0m " + company.getCompanyId());
@@ -74,7 +86,7 @@ public class Art {
         System.out.println(" \u001B[33mImage:\u001B[0m " + coupon.getImage());
     }
 
-    public static void START() {
+    public static void start() {
         System.out.println("""
                             
                                
@@ -88,7 +100,7 @@ public class Art {
     }
 
 
-    public static void END() {
+    public static void end() {
         System.out.println("""
                             
                             
@@ -133,7 +145,7 @@ public class Art {
 
     }
 
-    public static void INIT_DATABASE() {
+    public static void initDatabase() {
         System.out.println("""
                 ██╗███╗   ██╗██╗████████╗    ██████╗  █████╗ ████████╗ █████╗ ██████╗  █████╗ ███████╗███████╗        \s
                 ██║████╗  ██║██║╚══██╔══╝    ██╔══██╗██╔══██╗╚══██╔══╝██╔══██╗██╔══██╗██╔══██╗██╔════╝██╔════╝        \s
@@ -186,21 +198,24 @@ public class Art {
     }
 
 
-    public final static String ADMIN_METHODS = """
-             
-             
-             █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗    ███╗   ███╗███████╗████████╗██╗  ██╗ ██████╗ ██████╗ ███████╗      \s
-            ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║    ████╗ ████║██╔════╝╚══██╔══╝██║  ██║██╔═══██╗██╔══██╗██╔════╝    ██╗
-            ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║    ██╔████╔██║█████╗     ██║   ███████║██║   ██║██║  ██║███████╗    ╚═╝
-            ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║    ██║╚██╔╝██║██╔══╝     ██║   ██╔══██║██║   ██║██║  ██║╚════██║    ██╗
-            ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║╚██████╔╝██████╔╝███████║    ╚═╝
-            ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝      \s
-                                                                                                                       
-                                                                                                                       
-                                                                                                                       
-                                                                                                                           \s""";
+    public static void AdminMethods() {
+        System.out.println("""
+                 
+                 
+                 █████╗ ██████╗ ███╗   ███╗██╗███╗   ██╗    ███╗   ███╗███████╗████████╗██╗  ██╗ ██████╗ ██████╗ ███████╗\040\040\040\040\040\040
+                ██╔══██╗██╔══██╗████╗ ████║██║████╗  ██║    ████╗ ████║██╔════╝╚══██╔══╝██║  ██║██╔═══██╗██╔══██╗██╔════╝    ██╗
+                ███████║██║  ██║██╔████╔██║██║██╔██╗ ██║    ██╔████╔██║█████╗     ██║   ███████║██║   ██║██║  ██║███████╗    ╚═╝
+                ██╔══██║██║  ██║██║╚██╔╝██║██║██║╚██╗██║    ██║╚██╔╝██║██╔══╝     ██║   ██╔══██║██║   ██║██║  ██║╚════██║    ██╗
+                ██║  ██║██████╔╝██║ ╚═╝ ██║██║██║ ╚████║    ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║╚██████╔╝██████╔╝███████║    ╚═╝
+                ╚═╝  ╚═╝╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝    ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝\040\040\040\040\040\040
+                                                                                                                           
+                                                                                                                           
+                                                                                                                           
+                                                                                                                               \s"""
+        );
+    }
 
-    public static void COMPANIES_METHODS() {
+    public static void CompaniesMethods() {
         System.out.println(
                 """
 
@@ -216,7 +231,7 @@ public class Art {
     }
 
 
-    public static void CUSTOMERS_METHODS() {
+    public static void CustomersMethods() {
         System.out.println("""
                  
                  
@@ -229,7 +244,7 @@ public class Art {
                 """);
     }
 
-    public static void BEFORE() {
+    public static void before() {
         System.out.println();
         System.out.println("\033[34m" + """
                 ░█▀▄░█▀▀░█▀▀░█▀█░█▀▄░█▀▀
@@ -238,7 +253,7 @@ public class Art {
         System.out.println();
     }
 
-    public static void AFTER() {
+    public static void after() {
         System.out.println();
         System.out.println("\033[34m" + """
                 ░█▀█░█▀▀░▀█▀░█▀▀░█▀▄

@@ -1,4 +1,4 @@
-package com.jb.project2.exeptions;
+package com.jb.project2.exceptions;
 
 import lombok.Getter;
 
@@ -40,12 +40,8 @@ public enum ErrMsg {
     RESTRICTED_AREA("restricted area, you are not allowed to view this content"),
     LOGIN_FAILED("Failed to log in."),
     CUSTOMER_ID_CHANGE_NOT_ALLOWED("Customer id is not changeable."),
-
-    LOGIN_FAILED_INVALID_DETAILS("Login failed. You either typed wrong details, or this account doesn't exist."),
-    SECURITY_CANNOT_CREATE_ADMIN("ha ha ha nice try"),
     ADDING_FAILED_INVALID_END_DATE("The end-date must be in a future date. Adding failed."),
-    COUPON_EXPIRED("The end date of this coupon has already passed. Purchase was not done."),
-    UPDATE_FAILED_INVALID_END_DATE("The end-date must be in a future date. Update failed.");
+    UPDATE_FAILED_CANNOT_EDIT_ID("Company id is not changeable.");
 
 
     private final String MESSAGE;

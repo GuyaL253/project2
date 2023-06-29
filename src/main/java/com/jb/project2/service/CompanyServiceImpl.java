@@ -4,9 +4,9 @@ import com.jb.project2.beans.Category;
 import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Coupon;
 import com.jb.project2.dto.LoginResDto;
-import com.jb.project2.exeptions.CouponSystemException;
-import com.jb.project2.exeptions.CustomException;
-import com.jb.project2.exeptions.ErrMsg;
+import com.jb.project2.exceptions.CouponSystemException;
+import com.jb.project2.exceptions.CustomException;
+import com.jb.project2.exceptions.ErrMsg;
 import com.jb.project2.security.LoginInfo;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -42,7 +41,6 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
                     .build();
             UUID token = tokenService.getToken(loginInfo);
 
-            // Set the companyLoggedIn variable with the logged-in company
             companyLoggedIn = loggedInCompany;
 
             return LoginResDto.builder()
@@ -57,6 +55,8 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
 
     @Override
     public void addCoupon(Coupon coupon) throws CouponSystemException {
+        Date currentDate = new Date(System.currentTimeMillis());
+        Date endDate = coupon.getEndDate();
         if (couponRepository.findByCompanyIdAndTitle(coupon.getCompanyId(), coupon.getTitle()) != null) {
             throw new CouponSystemException(ErrMsg.DUPLICATE_COUPON_TITLE);
         }
@@ -69,9 +69,9 @@ public class CompanyServiceImpl extends ClientService implements CompanyService 
         if (coupon.getImage().equals("")) {
             throw new CouponSystemException(ErrMsg.ADDING_FAILED_MISSING_IMAGE_LINK);
         }
-//        if (coupon.getEndDate().before(new Date(2023,06,07))) {
-//            throw new CouponSystemException(ErrMsg.ADDING_FAILED_INVALID_END_DATE);
-//        }
+        if (endDate.before(currentDate)) {
+            throw new CouponSystemException(ErrMsg.ADDING_FAILED_INVALID_END_DATE);
+        }
         if (coupon.getPrice() < 0) {
             throw new CouponSystemException(ErrMsg.ADDING_FAILED_INVALID_PRICE);
         }

@@ -13,7 +13,10 @@ import org.springframework.stereotype.Component;
 @NoArgsConstructor
 @Builder
 public class LoginReqDto {
+
     private String email;
+
     private String password;
+
     private ClientType clientType;
 }

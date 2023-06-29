@@ -20,13 +20,13 @@ public class TestCustomer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         try {
             System.out.println();
-            Art.CUSTOMERS_METHODS();
+            Art.CustomersMethods();
             CustomerServiceImpl customersImpl = (CustomerServiceImpl) loginManager.login("Kylian@gmail.com", "Mbappe_password123456", ClientType.CUSTOMER);
 
             System.out.println();
             Art.goodTest("Successful purchase of coupon number 7 by the logged-in customer:");
             System.out.println("Please notice the amount of that coupon went down by 1");
-            Art.BEFORE();
+            Art.before();
             try {
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
             } catch (Exception e) {
@@ -36,7 +36,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.purchaseCoupon(7);
                 System.out.println();
-                Art.AFTER();
+                Art.after();
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
                 System.out.println();
                 Art.separator();
@@ -46,7 +46,7 @@ public class TestCustomer implements CommandLineRunner {
 
             System.out.println();
             Art.badTest("Unsuccessful coupon purchase by logged-in customer - coupon does not exists (28)");
-            Art.BEFORE();
+            Art.before();
             try {
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
             } catch (Exception e) {
@@ -56,7 +56,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.purchaseCoupon(28);
                 System.out.println();
-                Art.AFTER();
+                Art.after();
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
                 System.out.println();
                 Art.separator();
@@ -66,7 +66,7 @@ public class TestCustomer implements CommandLineRunner {
 
             System.out.println();
             Art.badTest("Unsuccessful coupon purchase of coupon 14 by logged-in customer - coupon amount is 0");
-            Art.BEFORE();
+            Art.before();
             try {
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
             } catch (Exception e) {
@@ -76,7 +76,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.purchaseCoupon(14);
                 System.out.println();
-                Art.AFTER();
+                Art.after();
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
                 System.out.println();
                 Art.separator();
@@ -86,7 +86,7 @@ public class TestCustomer implements CommandLineRunner {
 
             System.out.println();
             Art.badTest("Unsuccessful purchase of coupon 7 by logged-in customer - customer has already purchased this coupon");
-            Art.BEFORE();
+            Art.before();
             try {
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
             } catch (Exception e) {
@@ -96,7 +96,7 @@ public class TestCustomer implements CommandLineRunner {
             try {
                 customersImpl.purchaseCoupon(7);
                 System.out.println();
-                Art.AFTER();
+                Art.after();
                 customersImpl.getCustomerCoupons().forEach(Art::printCouponDetails);
                 System.out.println();
                 Art.separator();
@@ -104,7 +104,6 @@ public class TestCustomer implements CommandLineRunner {
                 Art.catchPrint("Failed to purchase coupon: " + e.getMessage());
             }
 
-            ///////////////////////////////////////////////////////////////////////////////////////////////////
 
             System.out.println();
             Art.goodTest("Successful receive of customer coupons of logged-in customer:");
@@ -117,7 +116,6 @@ public class TestCustomer implements CommandLineRunner {
             System.out.println();
             Art.separator();
 
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             System.out.println();
             Art.goodTest("Successful receive of logged-in customer coupons by the category 'SHOES':");
@@ -130,7 +128,6 @@ public class TestCustomer implements CommandLineRunner {
             System.out.println();
             Art.separator();
 
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             System.out.println();
             Art.goodTest("Successful receive of coupons of logged-in customer, equal or under the price 50:");
@@ -143,7 +140,6 @@ public class TestCustomer implements CommandLineRunner {
             System.out.println();
             Art.separator();
 
-            ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             System.out.println();
             Art.goodTest("Successful receive of logged-in customer details:");

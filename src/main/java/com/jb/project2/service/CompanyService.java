@@ -1,12 +1,10 @@
 package com.jb.project2.service;
 
 import com.jb.project2.beans.Category;
-import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Coupon;
-import com.jb.project2.exeptions.CouponSystemException;
-import com.jb.project2.exeptions.CustomException;
+import com.jb.project2.exceptions.CouponSystemException;
+import com.jb.project2.exceptions.CustomException;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 

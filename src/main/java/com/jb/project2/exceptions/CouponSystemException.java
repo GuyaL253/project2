@@ -1,4 +1,4 @@
-package com.jb.project2.exeptions;
+package com.jb.project2.exceptions;
 
 public class CouponSystemException extends Exception{
 

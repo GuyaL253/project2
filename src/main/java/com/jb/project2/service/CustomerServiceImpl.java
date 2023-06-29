@@ -1,13 +1,12 @@
 package com.jb.project2.service;
 
 import com.jb.project2.beans.Category;
-import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Coupon;
 import com.jb.project2.beans.Customer;
 import com.jb.project2.dto.LoginResDto;
-import com.jb.project2.exeptions.CouponSystemException;
-import com.jb.project2.exeptions.CustomException;
-import com.jb.project2.exeptions.ErrMsg;
+import com.jb.project2.exceptions.CouponSystemException;
+import com.jb.project2.exceptions.CustomException;
+import com.jb.project2.exceptions.ErrMsg;
 import com.jb.project2.security.LoginInfo;
 import com.jb.project2.utills.Art;
 import lombok.Data;
@@ -43,7 +42,6 @@ public class CustomerServiceImpl extends ClientService implements CustomerServic
                     .build();
             UUID token = tokenService.getToken(loginInfo);
 
-            // Set the customerLoggedIn variable with the logged-in customer
             customerLoggedIn = loggedInCustomer;
 
             return LoginResDto.builder()

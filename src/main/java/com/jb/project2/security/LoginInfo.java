@@ -14,7 +14,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class LoginInfo {
+
     private int id;
+
     private ClientType clientType;
+
     private LocalDateTime time;
+
 }

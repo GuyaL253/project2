@@ -28,7 +28,7 @@ public class Init implements CommandLineRunner {
 
         try {
             System.out.println();
-            Art.INIT_DATABASE();
+            Art.initDatabase();
             Art.separator();
             AdminServiceImpl adminImpl = (AdminServiceImpl) loginManager.login("admin@admin.com", "admin", ClientType.ADMINISTRATOR);
 

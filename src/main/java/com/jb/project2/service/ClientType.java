@@ -21,6 +21,6 @@ public enum ClientType {
                 return clientType;
             }
         }
-        return null; // Return null if no matching credentials are found
+        return null;
     }
 }

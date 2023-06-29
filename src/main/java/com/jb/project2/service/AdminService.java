@@ -1,10 +1,9 @@
 package com.jb.project2.service;
 
 
-
 import com.jb.project2.beans.Company;
 import com.jb.project2.beans.Customer;
-import com.jb.project2.exeptions.CouponSystemException;
+import com.jb.project2.exceptions.CouponSystemException;
 
 
 import java.util.List;
@@ -16,9 +15,10 @@ public interface AdminService {
 
     void addCompaniesListToDB(List<Company> companies) throws CouponSystemException;
 
-    void updateCompany(Company company) throws CouponSystemException;
+    void updateCompany(int companyId,Company company) throws CouponSystemException;
 
     void deleteCompany(int companyID) throws CouponSystemException;
+
     void deleteCompanyCoupons(int companyId) throws CouponSystemException;
 
     List<Company> getAllCompanies();
@@ -29,7 +29,7 @@ public interface AdminService {
 
     void addCustomersListToDB(List<Customer> customers) throws CouponSystemException;
 
-    void updateCustomer(int customerId ,Customer customer) throws CouponSystemException;
+    void updateCustomer(int customerId, Customer customer) throws CouponSystemException;
 
     void deleteCustomer(int customerID) throws CouponSystemException;
 

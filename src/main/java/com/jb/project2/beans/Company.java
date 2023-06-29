@@ -27,7 +27,6 @@ public class Company {
     @Column(length = 30, nullable = false)
     private String password;
 
-    @Singular
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Coupon> coupons;
 }

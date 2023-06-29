@@ -1,6 +1,6 @@
 package com.jb.project2.advice;
 
-import com.jb.project2.exeptions.CouponSystemException;
+import com.jb.project2.exceptions.CouponSystemException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -12,7 +12,7 @@ public class CouponControllerAdvice {
 
     @ExceptionHandler(value = {CouponSystemException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ErrDetails handleException(Exception e){
+    public ErrDetails handleException(Exception e) {
         return new ErrDetails(e.getMessage());
     }
 }

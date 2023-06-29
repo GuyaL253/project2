@@ -25,13 +25,13 @@ public class TestCompany implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         try {
-            Art.COMPANIES_METHODS();
+            Art.CompaniesMethods();
             CompanyServiceImpl companiesImpl = (CompanyServiceImpl) loginManager.login("adidas@gmail.com", "company1234567", ClientType.COMPANY);
 
             System.out.println();
             Art.goodTest("Successful coupon add for the logged-in company:");
             System.out.println();
-            Art.BEFORE();
+            Art.before();
             try {
                 companiesImpl.getCompanyCoupons(companiesImpl.getCompanyLoggedIn().getCompanyId()).forEach(Art::printCouponDetails);
             } catch (Exception e) {
@@ -41,7 +41,7 @@ public class TestCompany implements CommandLineRunner {
             Coupon couponAdded = Coupon.builder().companyId(companiesImpl.getCompanyLoggedIn().getCompanyId()).category(Category.JERSEYS).title("Added coupon").description("Premium jerseys for just 1,000 NIS - Limited time offer!").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(50).price(1000.00).image("Image").build();
             try {
                 companiesImpl.addCoupon(couponAdded);
-                Art.AFTER();
+                Art.after();
                 companiesImpl.getCompanyCoupons(companiesImpl.getCompanyLoggedIn().getCompanyId()).forEach(Art::printCouponDetails);
                 System.out.println();
                 System.out.println();
@@ -50,15 +50,14 @@ public class TestCompany implements CommandLineRunner {
                 System.out.println("Failed to add coupon: " + e.getMessage());
             }
 
-            // Update coupon
             Art.goodTest("Successful coupon update for coupon number 8");
             System.out.println();
-            Art.BEFORE();
+            Art.before();
             try {
                 Art.printCouponDetails(companiesImpl.getOneCoupon(8));
                 Coupon couponUpdated = Coupon.builder().couponId(8).companyId(companiesImpl.getCompanyLoggedIn().getCompanyId()).category(Category.BALLS).title("Updated coupon").description("Updated coupon description").startDate(Date.valueOf(LocalDate.now())).endDate(Date.valueOf(LocalDate.now().plusDays(7))).amount(100).price(50.00).image("Updated image").build();
                 companiesImpl.updateCoupon(couponUpdated);
-                Art.AFTER();
+                Art.after();
                 Art.printCouponDetails(companiesImpl.getOneCoupon(8));
                 System.out.println();
                 Art.separator();
@@ -66,14 +65,13 @@ public class TestCompany implements CommandLineRunner {
                 Art.catchPrint("Failed to update coupon: " + e.getMessage());
             }
 
-            // Delete coupon
             Art.goodTest("Successful coupon delete for coupon number 5");
             System.out.println();
-            Art.BEFORE();
+            Art.before();
             try {
                 companiesImpl.getCompanyCoupons(companiesImpl.getCompanyLoggedIn().getCompanyId()).forEach(Art::printCouponDetails);
                 companiesImpl.deleteCoupon(5);
-                Art.AFTER();
+                Art.after();
                 try {
                     companiesImpl.getCompanyCoupons(companiesImpl.getCompanyLoggedIn().getCompanyId()).forEach(Art::printCouponDetails);
                     System.out.println();
@@ -84,9 +82,6 @@ public class TestCompany implements CommandLineRunner {
             } catch (Exception e) {
                 Art.catchPrint("Failed to delete coupon: " + e.getMessage());
             }
-
-
-
         } catch (Exception e) {
             Art.catchPrint("An error occurred: " + e.getMessage());
         }

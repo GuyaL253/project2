@@ -2,8 +2,8 @@ package com.jb.project2.service;
 
 import com.jb.project2.beans.Category;
 import com.jb.project2.beans.Coupon;
-import com.jb.project2.exeptions.CouponSystemException;
-import com.jb.project2.exeptions.CustomException;
+import com.jb.project2.exceptions.CouponSystemException;
+import com.jb.project2.exceptions.CustomException;
 
 import java.util.List;
 
