@@ -45,6 +45,7 @@ public class Init implements CommandLineRunner {
             List<Company> companies = Arrays.asList(company1, company2, company3, company4, company5);
             adminImpl.addCompaniesListToDB(companies);
 
+
             Customer customer1 = Customer.builder().firstName("Cristiano").lastName("Ronaldo").email("Cristiano@gmail.com").password("password123456").build();
 
             Customer customer2 = Customer.builder().firstName("Lionel").lastName("Messi").email("Lionel@gmail.com").password("customer1234567").build();
@@ -152,7 +153,19 @@ public class Init implements CommandLineRunner {
             customersImpl.purchaseCouponForBuildingDB(9, 13);
             customersImpl.purchaseCouponForBuildingDB(10, 5);
 
-            System.out.println();
+            Art.separator();
+            Art.initCompanies();
+            List<Company> companies2 = adminImpl.getAllCompanies();
+            Art.printCompaniesDetails(companies2);
+            Art.separator();
+            Art.initCustomers();
+            List<Customer> customers2 = adminImpl.getAllCustomers();
+            Art.printCustomersDetails(customers2);
+            Art.separator();
+            Art.initCoupons();
+            List<Coupon> couponList = adminImpl.getAllCoupons();
+            Art.printCouponsDetails(couponList);
+            Art.separator();
             Art.DATABASE_READY();
 
         } catch (Exception err) {

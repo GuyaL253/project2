@@ -233,6 +233,11 @@ public class AdminServiceImpl extends ClientService implements AdminService {
     }
 
     @Override
+    public List<Coupon> getAllCoupons() {
+        return couponRepository.findAll();
+    }
+
+    @Override
     public Optional<Customer> getOneCustomer(int customerID) throws CouponSystemException {
         if (!customerRepository.existsById(customerID)) {
             throw new CouponSystemException(ErrMsg.CUSTOMER_NOT_FOUND);

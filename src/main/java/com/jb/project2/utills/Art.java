@@ -31,6 +31,7 @@ public class Art {
             System.out.println(coloredToken + ", " + coloredId + ", " + coloredClientType);
         });
     }
+
     public static void printCompanyDetails(Company company) {
         System.out.print("\u001B[36mCompany Details:\u001B[0m");
         System.out.print(" \u001B[34mCompany ID:\u001B[0m " + company.getCompanyId());
@@ -84,6 +85,21 @@ public class Art {
         System.out.print(" \u001B[33mAmount:\u001B[0m " + coupon.getAmount());
         System.out.print(" \u001B[33mPrice:\u001B[0m " + coupon.getPrice());
         System.out.println(" \u001B[33mImage:\u001B[0m " + coupon.getImage());
+    }
+
+    public static void printCouponsDetails(List<Coupon> couponList) {
+        System.out.println("\u001B[34mCoupons:\u001B[0m");
+        for (Coupon coupon : couponList) {
+            System.out.print("  \u001B[33mCoupon ID:\u001B[0m " + coupon.getCouponId());
+            System.out.print(" \u001B[33mTitle:\u001B[0m " + coupon.getTitle());
+            System.out.print(" \u001B[33mDescription:\u001B[0m " + coupon.getDescription());
+            System.out.print(" \u001B[33mStart Date:\u001B[0m " + coupon.getStartDate());
+            System.out.print(" \u001B[33mEnd Date:\u001B[0m " + coupon.getEndDate());
+            System.out.print(" \u001B[33mAmount:\u001B[0m " + coupon.getAmount());
+            System.out.print(" \u001B[33mPrice:\u001B[0m " + coupon.getPrice());
+            System.out.println(" \u001B[33mImage:\u001B[0m " + coupon.getImage());
+        }
+        System.out.println();
     }
 
     public static void start() {
@@ -241,6 +257,45 @@ public class Art {
                 ██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗╚════██║    ██║╚██╔╝██║██╔══╝     ██║   ██╔══██║██║   ██║██║  ██║╚════██║    ██╗
                 ╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║███████║    ██║ ╚═╝ ██║███████╗   ██║   ██║  ██║╚██████╔╝██████╔╝███████║    ╚═╝
                  ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝    ╚═╝     ╚═╝╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝ ╚═════╝ ╚══════╝      \s
+                """);
+    }
+
+    public static void initCompanies() {
+        System.out.println("""
+
+                ███████╗     ██████╗ ██████╗ ███╗   ███╗██████╗  █████╗ ███╗   ██╗██╗███████╗███████╗
+                ██╔════╝    ██╔════╝██╔═══██╗████╗ ████║██╔══██╗██╔══██╗████╗  ██║██║██╔════╝██╔════╝
+                ███████╗    ██║     ██║   ██║██╔████╔██║██████╔╝███████║██╔██╗ ██║██║█████╗  ███████╗
+                ╚════██║    ██║     ██║   ██║██║╚██╔╝██║██╔═══╝ ██╔══██║██║╚██╗██║██║██╔══╝  ╚════██║
+                ███████║    ╚██████╗╚██████╔╝██║ ╚═╝ ██║██║     ██║  ██║██║ ╚████║██║███████╗███████║
+                ╚══════╝     ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚══════╝
+                                                                                                    \s
+                """);
+    }
+
+    public static void initCustomers(){
+        System.out.println("""
+
+                 ██╗ ██████╗      ██████╗██╗   ██╗███████╗████████╗ ██████╗ ███╗   ███╗███████╗██████╗ ███████╗
+                ███║██╔═████╗    ██╔════╝██║   ██║██╔════╝╚══██╔══╝██╔═══██╗████╗ ████║██╔════╝██╔══██╗██╔════╝
+                ╚██║██║██╔██║    ██║     ██║   ██║███████╗   ██║   ██║   ██║██╔████╔██║█████╗  ██████╔╝███████╗
+                 ██║████╔╝██║    ██║     ██║   ██║╚════██║   ██║   ██║   ██║██║╚██╔╝██║██╔══╝  ██╔══██╗╚════██║
+                 ██║╚██████╔╝    ╚██████╗╚██████╔╝███████║   ██║   ╚██████╔╝██║ ╚═╝ ██║███████╗██║  ██║███████║
+                 ╚═╝ ╚═════╝      ╚═════╝ ╚═════╝ ╚══════╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚══════╝
+                                                                                                              \s
+                """);
+    }
+
+    public static void initCoupons(){
+        System.out.println("""
+
+                ██████╗  ██████╗      ██████╗ ██████╗ ██╗   ██╗██████╗  ██████╗ ███╗   ██╗███████╗
+                ╚════██╗██╔═████╗    ██╔════╝██╔═══██╗██║   ██║██╔══██╗██╔═══██╗████╗  ██║██╔════╝
+                 █████╔╝██║██╔██║    ██║     ██║   ██║██║   ██║██████╔╝██║   ██║██╔██╗ ██║███████╗
+                ██╔═══╝ ████╔╝██║    ██║     ██║   ██║██║   ██║██╔═══╝ ██║   ██║██║╚██╗██║╚════██║
+                ███████╗╚██████╔╝    ╚██████╗╚██████╔╝╚██████╔╝██║     ╚██████╔╝██║ ╚████║███████║
+                ╚══════╝ ╚═════╝      ╚═════╝ ╚═════╝  ╚═════╝ ╚═╝      ╚═════╝ ╚═╝  ╚═══╝╚══════╝
+                                                                                                 \s
                 """);
     }
 

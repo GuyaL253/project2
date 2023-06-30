@@ -2,6 +2,7 @@ package com.jb.project2.service;
 
 
 import com.jb.project2.beans.Company;
+import com.jb.project2.beans.Coupon;
 import com.jb.project2.beans.Customer;
 import com.jb.project2.exceptions.CouponSystemException;
 
@@ -34,6 +35,7 @@ public interface AdminService {
     void deleteCustomer(int customerID) throws CouponSystemException;
 
     List<Customer> getAllCustomers();
+    List<Coupon> getAllCoupons();
 
     Optional<Customer> getOneCustomer(int customerID) throws CouponSystemException;
 }

@@ -15,12 +15,4 @@ public enum ClientType {
     private String email;
     private String password;
 
-    public static ClientType getType(String email, String password) {
-        for (ClientType clientType : ClientType.values()) {
-            if (clientType.getEmail().equals(email) && clientType.getPassword().equals(password)) {
-                return clientType;
-            }
-        }
-        return null;
-    }
 }
